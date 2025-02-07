@@ -1,0 +1,115 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00245a;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+}
+
+.sidebar .list-group-item {
+    color: white;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    padding: 15px 20px;
+}
+
+.sidebar .list-group-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+
+.sidebar .list-group-item.active {
+    background-color: #002349;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.logo-img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 25%;
+}
+
+.logo-container h4 {
+    margin-left: 10px;
+    font-size: 1.2rem;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: all 0.3s ease;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+}
+
+.list-group-item:last-child {
+    border-bottom: none;
+}
+
+.list-group-item strong {
+    color: #002a6a;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        display: none;
+    }
+    .sidebar.active {
+        display: block;
+    }
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
