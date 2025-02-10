@@ -43,8 +43,8 @@ $galeri = $koneksi->query("SELECT * FROM GALERI");
                         <td><?= htmlspecialchars($row['judul_galeri']) ?></td>
                         <td><?= htmlspecialchars($row['tgl_galeri']) ?></td>
                         <td>
-                            <?php if ($row['image']): ?>
-                                <img src="../../assets/img/galeri/<?= htmlspecialchars($row['image']) ?>" width="100" class="img-thumbnail">
+                            <?php if ($row['foto_galeri']): ?>
+                                <img src="../../public/image/galeri/<?= htmlspecialchars($row['foto_galeri']) ?>" width="100" class="img-thumbnail">
                             <?php else: ?>
                                 Tidak ada foto
                             <?php endif; ?>

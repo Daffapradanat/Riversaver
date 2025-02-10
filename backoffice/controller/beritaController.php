@@ -3,7 +3,7 @@ include '../../config/koneksi.php';
 session_start();
 
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: ../../auth/login.php");
+    header("Location: /Riversaver_Native/auth/login.php");
     exit();
 }
 

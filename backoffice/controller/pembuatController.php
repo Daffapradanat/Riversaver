@@ -1,11 +1,19 @@
 <?php
 include '../../config/koneksi.php';
+session_start();
+
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: /Riversaver_Native/auth/login.php");
+    exit();
+}
+
+$id_admin = $_SESSION['admin_id'];
 
 if (isset($_POST['tambah'])) {
     $nama = $_POST['nama_pembuat'];
     $pendidikan = $_POST['pendidikan_pembuat'];
     $detail = $_POST['detail_pembuat'];
-    $id_admin = $_POST['id_admin']; 
+    // $id_admin = $_POST['id_admin']; 
     
     $foto = $_FILES['foto_pembuat']['name'];
     $tmp = $_FILES['foto_pembuat']['tmp_name'];

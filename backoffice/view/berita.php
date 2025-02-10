@@ -44,7 +44,7 @@ $berita = $koneksi->query("SELECT * FROM BERITA");
                         <td><?= htmlspecialchars($row['tgl_berita']) ?></td>
                         <td>
                             <?php if ($row['foto_berita']): ?>
-                                <img src="../../assets/img/berita/<?= htmlspecialchars($row['foto_berita']) ?>" width="100" class="img-thumbnail">
+                                <img src="../../public/image/berita/<?= htmlspecialchars($row['foto_berita']) ?>" width="100" class="img-thumbnail">
                             <?php else: ?>
                                 Tidak ada foto
                             <?php endif; ?>

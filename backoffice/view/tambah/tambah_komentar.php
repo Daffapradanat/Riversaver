@@ -19,7 +19,7 @@ include '../../../config/koneksi.php';
 
         <div class="container mt-4">
             <h1 class="mb-4">Tambah Komentar Baru</h1>
-            <form action="../../../controller/komentarController.php" method="POST">
+            <form action="../../controller/komentarController.php" method="POST">
                 <div class="mb-3">
                     <label for="nama_pengguna" class="form-label">Nama Pengguna</label>
                     <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" required>

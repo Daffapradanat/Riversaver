@@ -26,7 +26,7 @@
             }
             ?>
 
-            <form action="../controller/gameController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/gameController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_game" value="<?= $data['id_game'] ?>">
 
                 <div class="mb-3">
@@ -53,7 +53,7 @@
                     <label for="image" class="form-label">Foto Game</label>
                     <?php if ($data['image']): ?>
                         <div class="mb-2">
-                            <img src="../../public/image/game/<?= htmlspecialchars($data['image']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/game/<?= htmlspecialchars($data['image']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
                     <input type="file" class="form-control" id="image" name="image">

@@ -19,7 +19,7 @@ include '../../../config/koneksi.php';
 
         <div class="container mt-4">
             <h1 class="mb-4">Tambah Galeri Baru</h1>
-            <form action="../../../controller/galeriController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/galeriController.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="judul_galeri" class="form-label">Judul Galeri</label>
                     <input type="text" class="form-control" id="judul_galeri" name="judul_galeri" required>

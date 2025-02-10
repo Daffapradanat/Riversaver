@@ -44,7 +44,7 @@ $pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
                         <td><?= htmlspecialchars($row['pendidikan_pembuat']) ?></td>
                         <td>
                             <?php if ($row['foto_pembuat']): ?>
-                                <img src="../../assets/img/pembuat/<?= htmlspecialchars($row['foto_pembuat']) ?>" width="100" class="img-thumbnail">
+                                <img src="../../public/image/pembuat/<?= htmlspecialchars($row['foto_pembuat']) ?>" width="100" class="img-thumbnail">
                             <?php else: ?>
                                 Tidak ada foto
                             <?php endif; ?>

@@ -26,7 +26,7 @@
             }
             ?>
 
-            <form action="../controller/galeriController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/galeriController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_galeri" value="<?= $data['id_galeri'] ?>">
 
                 <div class="mb-3">
@@ -45,13 +45,13 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Foto Galeri</label>
-                    <?php if ($data['image']): ?>
+                    <label for="foto_galeri" class="form-label">Foto Galeri</label>
+                    <?php if ($data['foto_galeri']): ?>
                         <div class="mb-2">
-                            <img src="../../public/image/galeri/<?= htmlspecialchars($data['image']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/galeri/<?= htmlspecialchars($data['foto_galeri']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="foto_galeri" name="foto_galeri">
                     <small class="text-muted">Kosongkan jika tidak ingin mengganti foto.</small>
                 </div>
 

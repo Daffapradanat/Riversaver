@@ -26,7 +26,7 @@
             }
             ?>
 
-            <form action="../controller/beritaController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/beritaController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_merchan" value="<?= $data['id_merchan'] ?>">
 
                 <div class="mb-3">
@@ -48,7 +48,7 @@
                     <label for="foto_merchan" class="form-label">Foto Merchendise</label>
                     <?php if ($data['foto_merchan']): ?>
                         <div class="mb-2">
-                            <img src="../../public/image/berita/<?= htmlspecialchars($data['foto_merchan']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/berita/<?= htmlspecialchars($data['foto_merchan']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
                     <input type="file" class="form-control" id="foto_merchan" name="foto_merchan">

@@ -46,7 +46,7 @@ $game = $koneksi->query("SELECT * FROM GAME");
                         <td><?= htmlspecialchars($row['spesifikasi']) ?></td>
                         <td>
                             <?php if ($row['image']): ?>
-                                <img src="../../assets/img/game/<?= htmlspecialchars($row['image']) ?>" width="100" class="img-thumbnail">
+                                <img src="../../public/image/game/<?= htmlspecialchars($row['image']) ?>" width="100" class="img-thumbnail">
                             <?php else: ?>
                                 Tidak ada foto
                             <?php endif; ?>

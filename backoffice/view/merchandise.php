@@ -44,7 +44,7 @@ $merchandise = $koneksi->query("SELECT * FROM MERCHANDISE");
                         <td>Rp <?= number_format($row['harga_merchan'], 2, ',', '.') ?></td>
                         <td>
                             <?php if ($row['foto_merchan']): ?>
-                                <img src="../../assets/img/merchandise/<?= htmlspecialchars($row['foto_merchan']) ?>" width="100" class="img-thumbnail">
+                                <img src="../../public/image/merchandise/<?= htmlspecialchars($row['foto_merchan']) ?>" width="100" class="img-thumbnail">
                             <?php else: ?>
                                 Tidak ada foto
                             <?php endif; ?>

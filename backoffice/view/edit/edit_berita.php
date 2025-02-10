@@ -48,7 +48,7 @@
                     <label for="foto_berita" class="form-label">Foto Berita</label>
                     <?php if ($data['foto_berita']): ?>
                         <div class="mb-2">
-                            <img src="../../public/image/berita/<?= htmlspecialchars($data['foto_berita']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/berita/<?= htmlspecialchars($data['foto_berita']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
                     <input type="file" class="form-control" id="foto_berita" name="foto_berita">

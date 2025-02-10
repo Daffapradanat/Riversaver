@@ -26,7 +26,7 @@
             }
             ?>
 
-            <form action="../controller/beritaController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/beritaController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_komentar" value="<?= $data['id_komentar'] ?>">
 
                 <div class="mb-3">
