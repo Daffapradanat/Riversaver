@@ -23,9 +23,45 @@
     <div class="fade-1"></div>
 </div>
 
-<div class="description-game">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus saepe aut quod quibusdam nostrum nobis culpa</div>
+<div class="description-game">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore tempora ipsam hic eligendi quibusdam voluptatum enim, pariatur odio blanditiis nesciunt recusandae maxime explicabo sed tempore, illum magni porro corrupti dicta?x</div>
 
-<div class="general-info"></div>
+<div class="general-info">
+    <h1>General Info</h1>
+    <div class="info-details">
+        <p><strong>Version:</strong> 1.0.0</p>
+        <p><strong>Genre:</strong> Adventure, Action</p>
+        <p><strong>Release Date:</strong> January 2025</p>
+    </div>
+
+    <div class="slider-container">
+        <input type="radio" name="slider" id="slide1" checked>
+        <input type="radio" name="slider" id="slide2">
+        <input type="radio" name="slider" id="slide3">
+        <div class="slides">
+            <div class="slide">
+                <div class="image-container">
+                    <img src="public/assets/test_foto.jpg" alt="Game Image 1">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="image-container">
+                    <img src="public/assets/test_foto.jpg" alt="Game Image 2">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="image-container">
+                    <img src="public/assets/test_foto.jpg" alt="Game Image 3">
+                </div>
+            </div>
+        </div>
+
+        <div class="slider-nav">
+            <label for="slide1"></label>
+            <label for="slide2"></label>
+            <label for="slide3"></label>
+        </div>
+    </div>
+</div>
 
 <?php include 'component/footer.php'; ?>
 </body>

@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #252525;
+    background-color: #000000;
     color: #333;
 }
 
@@ -218,10 +218,172 @@ main {
 
 /* Deskripsi section */
 .description-game {
-    margin: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 400;
+    line-height: 1.6;
+    transition: transform 0.3s ease-in-out;
+
+    /* You cant copy paste */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.description-game:hover {
+    transform: scale(1.02);
+}
+
+/* General Info Section */
+.general-info {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.general-info h1 {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.info-details {
     display: flex;
-    justify-items: center;
-    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.info-details p {
+    gap: 10px;
+    margin-top: 0 0 0 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.slider-container {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.slides {
+    display: flex;
+    width: 300%;
+    transition: transform 1s ease-in-out;
+}
+
+.slide {
+    width: 100%;
+    flex: 1 0 100%;
+    position: relative;
+    transition: filter 0.5s ease;
+}
+
+.image-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+input[name="slider"] {
+    display: none;
+}
+
+/* Slide Transitions */
+#slide1:checked ~ .slides {
+    transform: translateX(0);
+}
+
+#slide2:checked ~ .slides {
+    transform: translateX(-100%);
+}
+
+#slide3:checked ~ .slides {
+    transform: translateX(-200%);
+}
+
+.slider-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.slider-nav label {
+    width: 15px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.079);
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.slider-nav label:hover {
+    opacity: 1;
+}
+
+#slide1:checked ~ .slider-nav label[for="slide1"],
+#slide2:checked ~ .slider-nav label[for="slide2"],
+#slide3:checked ~ .slider-nav label[for="slide3"] {
+    opacity: 1;
+    background: #060077;
+}
+
+#slide1:checked ~ .slides .slide:nth-child(1) {
+    filter: blur(0px);
+}
+
+#slide1:checked ~ .slides .slide:nth-child(2),
+#slide1:checked ~ .slides .slide:nth-child(3) {
+    filter: blur(4px);
+}
+
+#slide2:checked ~ .slides .slide:nth-child(1),
+#slide2:checked ~ .slides .slide:nth-child(3) {
+    filter: blur(4px);
+}
+
+#slide2:checked ~ .slides .slide:nth-child(2) {
+    filter: blur(0px);
+}
+
+#slide3:checked ~ .slides .slide:nth-child(2),
+#slide3:checked ~ .slides .slide:nth-child(1) {
+    filter: blur(4px);
+}
+
+#slide3:checked ~ .slides .slide:nth-child(3) {
+    filter: blur(0px);
 }
 
 /* Footes */
