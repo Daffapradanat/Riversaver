@@ -63,6 +63,38 @@
     </div>
 </div>
 
+<div class="text-moving">
+    <span>Welcome to Riversaver! Enjoy the game and have fun!</span>
+</div>
+
+
+<div class="komentar-section">
+    <h2>Comments</h2>
+    <div class="komentar-container">
+        <div class="komentar-form">
+            <form action="backoffice/controller/komentarController.php" method="POST">
+                <input type="text" name="nama_tamu" placeholder="Your Name" required>
+                <textarea name="komentar" placeholder="Write a comment..." required></textarea>
+                <button type="submit" name="tambah">Submit</button>
+            </form>
+        </div>
+        
+        <div class="komentar-list">
+            <?php
+            include 'config/koneksi.php';
+            $result = $koneksi->query("SELECT * FROM KOMENTAR ORDER BY id_komentar DESC");
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='komentar-item'>";
+                echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>: ";
+                echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
+                echo "</div>";
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
+
 <?php include 'component/footer.php'; ?>
 </body>
 </html>
