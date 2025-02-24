@@ -1,3 +1,13 @@
+<?php
+include 'config/koneksi.php';
+
+$berita = $koneksi->query("SELECT * FROM BERITA");
+if (!$berita) {
+    die("Error mengambil data BERITA: " . $koneksi->error);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -9,6 +19,10 @@
 </head>
 <body>
 <?php include 'component/header.php'; ?>
+
+<div class="dashboard-content">
+    <div class="fade-1"></div>
+</div>
 
 <div class="news-container">
     <h2>Berita Terbaru</h2>
@@ -31,7 +45,7 @@
             <img src="public/assets/poster.jpg" alt="Berita 3">
             <h3>Judul Berita 3</h3>
             <p class="date">15 Feb 2025</p>
-            <p>Deskripsi singkat berita 3...</p>
+            <p>Deskripsi singkat berita 3...</p>    
             <a href="#" class="btn">Baca Selengkapnya</a>
         </div>
     </div>

@@ -1,3 +1,13 @@
+<?php
+include 'config/koneksi.php';
+
+$pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
+if (!$pembuat) {
+    die("Error mengambil data PEMBUAT: " . $koneksi->error);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
