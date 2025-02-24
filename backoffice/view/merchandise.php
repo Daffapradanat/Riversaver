@@ -51,7 +51,7 @@ $merchandise = $koneksi->query("SELECT * FROM MERCHANDISE");
                         </td>
                         <td><?= substr(htmlspecialchars($row['detail_merchan']), 0, 100) ?>...</td>
                         <td>
-                            <a href="edit/edit_merchandise.php?id=<?= $row['id_merchan'] ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="edit/edit_merchendise.php?id=<?= $row['id_merchan'] ?>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteUrl(<?= $row['id_merchan'] ?>)">Hapus</a>
                         </td>
                     </tr>
@@ -85,7 +85,7 @@ $merchandise = $koneksi->query("SELECT * FROM MERCHANDISE");
     <script>
         function setDeleteUrl(id) {
             const deleteBtn = document.getElementById('deleteConfirmBtn');
-            deleteBtn.href = `../controller/merchandiseController.php?hapus=${id}`;
+            deleteBtn.href = `../controller/merchendiseController.php?hapus=${id}`;
         }
     </script>
     <script>
