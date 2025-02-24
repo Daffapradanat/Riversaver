@@ -21,7 +21,7 @@
             
             if (isset($_GET['id'])) {
                 $id_komentar = $_GET['id'];
-                $result = $koneksi->query("SELECT * FROM BERITA WHERE id_komentar = '$id_komentar'");
+                $result = $koneksi->query("SELECT * FROM KOMENTAR WHERE id_komentar = '$id_komentar'");
                 $data = $result->fetch_assoc();
             }
             ?>
@@ -45,7 +45,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Berita</button>
-                <a href="/Riversaver_Native/backoffice/view/berita.php" class="btn btn-secondary">Batal</a>
+                <a href="/Riversaver_Native/backoffice/view/komentar.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

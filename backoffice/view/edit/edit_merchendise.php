@@ -21,7 +21,7 @@
             
             if (isset($_GET['id'])) {
                 $id_merchan = $_GET['id'];
-                $result = $koneksi->query("SELECT * FROM BERITA WHERE id_merchan = '$id_merchan'");
+                $result = $koneksi->query("SELECT * FROM MERCHANDISE WHERE id_merchan = '$id_merchan'");
                 $data = $result->fetch_assoc();
             }
             ?>
@@ -43,12 +43,11 @@
                     <label for="detail_merchan" class="form-label">Detail Merchendise</label>
                     <textarea class="form-control" id="detail_merchan" name="detail_merchan" rows="5" required><?= htmlspecialchars($data['detail_merchan']) ?></textarea>
                 </div>
-
                 <div class="mb-3">
                     <label for="foto_merchan" class="form-label">Foto Merchendise</label>
                     <?php if ($data['foto_merchan']): ?>
                         <div class="mb-2">
-                            <img src="../../../public/image/berita/<?= htmlspecialchars($data['foto_merchan']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/merchandise/<?= htmlspecialchars($data['foto_merchan']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
                     <input type="file" class="form-control" id="foto_merchan" name="foto_merchan">
@@ -56,7 +55,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Berita</button>
-                <a href="/Riversaver_Native/backoffice/view/berita.php" class="btn btn-secondary">Batal</a>
+                <a href="/Riversaver_Native/backoffice/view/merchandise.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

@@ -21,7 +21,7 @@
             
             if (isset($_GET['id'])) {
                 $id_pembuat = $_GET['id'];
-                $result = $koneksi->query("SELECT * FROM BERITA WHERE id_pembuat = '$id_pembuat'");
+                $result = $koneksi->query("SELECT * FROM PEMBUAT WHERE id_pembuat = '$id_pembuat'");
                 $data = $result->fetch_assoc();
             }
             ?>
@@ -48,7 +48,7 @@
                     <label for="foto_pembuat" class="form-label">Foto Pembuat</label>
                     <?php if ($data['foto_pembuat']): ?>
                         <div class="mb-2">
-                            <img src="../../../public/image/berita/<?= htmlspecialchars($data['foto_pembuat']) ?>" width="150" class="img-thumbnail">
+                            <img src="../../../public/image/pembuat/<?= htmlspecialchars($data['foto_pembuat']) ?>" width="150" class="img-thumbnail">
                         </div>
                     <?php endif; ?>
                     <input type="file" class="form-control" id="foto_pembuat" name="foto_pembuat">
@@ -56,7 +56,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Pembuat</button>
-                <a href="/Riversaver_Native/backoffice/view/berita.php" class="btn btn-secondary">Batal</a>
+                <a href="/Riversaver_Native/backoffice/view/pembuat.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>
