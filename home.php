@@ -88,54 +88,61 @@ $game = $game->fetch_assoc();
 
 
 <div class="komentar-section">
-    <!-- Form komentar di sebelah kiri -->
-    <div class="komentar-form">
-        <h3>Komentar</h3>
-        <form action="backoffice/controller/komentarController.php" method="POST">
-            <input type="text" name="nama_tamu" placeholder="Nama tamu" required>
-            <textarea name="komentar" placeholder="Feedback" required></textarea>
-            <button type="submit" name="tambah">Submit</button>
-        </form>
-    </div>
-
-    <div class="komentar-container">
-        <div class="swiper komentar-slider">
-            <div class="swiper-wrapper">
-            <?php
-                $counter = 0;
-                while ($row = $komentar->fetch_assoc()) {
-                    if ($counter >= 3) break;
-                    echo "<div class='swiper-slide'>";
-                    echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>";
-                    echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
-                    echo "</div>";
-                    $counter++;
-                }
-                ?>
-            </div>
+    <h2>What Our Users Say</h2>
+    <div class="komentar-layout">
+        <div class="komentar-form">
+            <h3>Share Your Feedback</h3>
+            <form action="backoffice/controller/komentarController.php" method="POST">
+                <input type="text" name="nama_tamu" placeholder="Your Name" required>
+                <textarea name="komentar" placeholder="Your Feedback" required></textarea>
+                <button type="submit" name="tambah">Submit</button>
+            </form>
         </div>
-        <button class="see-more-btn" onclick="openKomentarModal()">See more</button>
+
+        <div class="komentar-container">
+            <div class="swiper komentar-slider">
+                <div class="swiper-wrapper">
+                <?php
+                    $counter = 0;
+                    while ($row = $komentar->fetch_assoc()) {
+                        if ($counter >= 3) break;
+                        echo "<div class='swiper-slide'>";
+                        echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>";
+                        echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
+                        echo "</div>";
+                        $counter++;
+                    }
+                    ?>
+                </div>
+            </div>
+            <button class="see-more-btn" onclick="openKomentarModal()">See All Comments</button>
+        </div>
     </div>
 </div>
 
-<!-- Modal Popup -->
 <div id="komentarModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeKomentarModal()">&times;</span>
-        <h2>All Comments</h2>
-        <div>
-            <label for="searchKomentar">Search:</label>
-            <input type="text" id="searchKomentar" class="search-box">
+        <div class="modal-header">
+            <h2>All Comments</h2>
+            <span class="close" onclick="closeKomentarModal()">&times;</span>
         </div>
-        <div>
-            <label for="limitKomentar">Show:</label>
-            <select id="limitKomentar">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
+        
+        <div class="modal-search">
+            <div>
+                <label for="searchKomentar">Search:</label>
+                <input type="text" id="searchKomentar" class="search-box" placeholder="Search comments...">
+            </div>
+            <div>
+                <label for="limitKomentar">Show:</label>
+                <select id="limitKomentar">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
         </div>
+        
         <div id="komentarContainer">
             <?php
             $komentar->data_seek(0);
@@ -151,80 +158,211 @@ $game = $game->fetch_assoc();
     </div>
 </div>
 
-
 <?php include 'component/footer.php'; ?>
 
 <script src="public/assets/datatable/datatables.min.js"></script>
 <script src="public/assets/swiper/swiper-bundle.min.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", function () {
     var swiper = new Swiper('.komentar-slider', {
         loop: true,
-        autoplay: { delay: 3000 },
+        autoplay: { 
+            delay: 5000,
+            disableOnInteraction: false
+        },
         slidesPerView: 1,
         effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        speed: 800,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        let allComments = document.querySelectorAll(".komentar-card");
-        let searchBox = document.getElementById("searchKomentar");
-        let limitSelect = document.getElementById("limitKomentar");
-        let paginationContainer = document.getElementById("pagination");
+    let allComments = document.querySelectorAll(".komentar-card");
+    let searchBox = document.getElementById("searchKomentar");
+    let limitSelect = document.getElementById("limitKomentar");
+    let paginationContainer = document.getElementById("pagination");
 
-        let currentPage = 1;
-        let itemsPerPage = parseInt(limitSelect.value);
+    let currentPage = 1;
+    let itemsPerPage = parseInt(limitSelect.value);
 
-        function renderComments() {
-            let searchTerm = searchBox.value.toLowerCase();
-            let filteredComments = Array.from(allComments).filter(card =>
-                card.innerText.toLowerCase().includes(searchTerm)
-            );
+    function renderComments() {
+        let searchTerm = searchBox.value.toLowerCase();
+        
+        let filteredComments = Array.from(allComments).filter(card =>
+            card.innerText.toLowerCase().includes(searchTerm)
+        );
 
-            let totalPages = Math.ceil(filteredComments.length / itemsPerPage);
-            let start = (currentPage - 1) * itemsPerPage;
-            let end = start + itemsPerPage;
+        let totalPages = Math.ceil(filteredComments.length / itemsPerPage);
+        let start = (currentPage - 1) * itemsPerPage;
+        let end = start + itemsPerPage;
 
-            allComments.forEach(card => (card.style.display = "none"));
-            filteredComments.slice(start, end).forEach(card => (card.style.display = "block"));
+        allComments.forEach(card => (card.style.display = "none"));
+        
+        filteredComments.slice(start, end).forEach(card => {
+            card.style.display = "block";
+            card.style.animation = "fadeIn 0.5s ease-in-out";
+        });
 
-            renderPagination(totalPages);
+        renderPagination(totalPages);
+        
+        const noResultsMsg = document.getElementById("noResultsMsg");
+        if (filteredComments.length === 0) {
+            if (!noResultsMsg) {
+                const msg = document.createElement("div");
+                msg.id = "noResultsMsg";
+                msg.textContent = "No comments found matching your search.";
+                msg.style.textAlign = "center";
+                msg.style.padding = "20px";
+                msg.style.color = "#666";
+                document.getElementById("komentarContainer").appendChild(msg);
+            }
+        } else if (noResultsMsg) {
+            noResultsMsg.remove();
+        }
+    }
+
+    function renderPagination(totalPages) {
+        paginationContainer.innerHTML = "";
+        
+        if (totalPages <= 1) return;
+        
+        if (currentPage > 1) {
+            let prevBtn = document.createElement("span");
+            prevBtn.classList.add("page-item");
+            prevBtn.innerHTML = "&laquo;";
+            prevBtn.addEventListener("click", function () {
+                currentPage--;
+                renderComments();
+            });
+            paginationContainer.appendChild(prevBtn);
         }
 
-        function renderPagination(totalPages) {
-            paginationContainer.innerHTML = "";
-            for (let i = 1; i <= totalPages; i++) {
-                let pageItem = document.createElement("span");
-                pageItem.classList.add("page-item");
-                if (i === currentPage) pageItem.classList.add("active");
-                pageItem.innerText = i;
-                pageItem.addEventListener("click", function () {
-                    currentPage = i;
-                    renderComments();
-                });
-                paginationContainer.appendChild(pageItem);
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, startPage + 4);
+        startPage = Math.max(1, endPage - 4);
+
+        if (startPage > 1) {
+            let firstPage = document.createElement("span");
+            firstPage.classList.add("page-item");
+            firstPage.innerText = "1";
+            firstPage.addEventListener("click", function () {
+                currentPage = 1;
+                renderComments();
+            });
+            paginationContainer.appendChild(firstPage);
+            
+            if (startPage > 2) {
+                let ellipsis = document.createElement("span");
+                ellipsis.textContent = "...";
+                ellipsis.style.margin = "0 5px";
+                paginationContainer.appendChild(ellipsis);
             }
         }
 
-        searchBox.addEventListener("input", function () {
-            currentPage = 1;
-            renderComments();
-        });
+        for (let i = startPage; i <= endPage; i++) {
+            let pageItem = document.createElement("span");
+            pageItem.classList.add("page-item");
+            if (i === currentPage) pageItem.classList.add("active");
+            pageItem.innerText = i;
+            pageItem.addEventListener("click", function () {
+                currentPage = i;
+                renderComments();
+            });
+            paginationContainer.appendChild(pageItem);
+        }
 
-        limitSelect.addEventListener("change", function () {
-            itemsPerPage = parseInt(this.value);
-            currentPage = 1;
-            renderComments();
-        });
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                let ellipsis = document.createElement("span");
+                ellipsis.textContent = "...";
+                ellipsis.style.margin = "0 5px";
+                paginationContainer.appendChild(ellipsis);
+            }
+            
+            let lastPage = document.createElement("span");
+            lastPage.classList.add("page-item");
+            lastPage.innerText = totalPages;
+            lastPage.addEventListener("click", function () {
+                currentPage = totalPages;
+                renderComments();
+            });
+            paginationContainer.appendChild(lastPage);
+        }
 
+        if (currentPage < totalPages) {
+            let nextBtn = document.createElement("span");
+            nextBtn.classList.add("page-item");
+            nextBtn.innerHTML = "&raquo;";
+            nextBtn.addEventListener("click", function () {
+                currentPage++;
+                renderComments();
+            });
+            paginationContainer.appendChild(nextBtn);
+        }
+    }
+
+    searchBox.addEventListener("input", function () {
+        currentPage = 1;
         renderComments();
     });
 
-    function openKomentarModal() {
-        document.getElementById("komentarModal").style.display = "flex";
-    }
+    limitSelect.addEventListener("change", function () {
+        itemsPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderComments();
+    });
 
-    function closeKomentarModal() {
-        document.getElementById("komentarModal").style.display = "none";
-    }
+    // Animation for modal
+    document.getElementById("komentarModal").addEventListener("click", function(e) {
+        if (e.target === this) {
+            closeKomentarModal();
+        }
+    });
+
+    // Initialize comments display
+    renderComments();
+});
+
+// Updated modal functions
+function openKomentarModal() {
+    const modal = document.getElementById("komentarModal");
+    modal.style.display = "flex";
+    modal.style.animation = "fadeIn 0.3s ease-in-out";
+    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+}
+
+function closeKomentarModal() {
+    const modal = document.getElementById("komentarModal");
+    modal.style.animation = "fadeOut 0.3s ease-in-out";
+    setTimeout(() => {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+    }, 300);
+}
+
+// Add these keyframe animations to your CSS
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+</style>
+`);
 </script>
 
 </body>

@@ -9,7 +9,7 @@ if (isset($_GET['hapus'])) {
     header("Location: ../../home.php");
     exit();
 }
-
+    
 if (isset($_POST['tambah'])) {
     $nama_tamu = $_POST['nama_tamu'];
     $komentar = $_POST['komentar'];
