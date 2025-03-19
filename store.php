@@ -30,7 +30,7 @@ if (!$merchandise) {
     <div class="merchandise-grid">
         <?php while ($row = $merchandise->fetch_assoc()) { ?>
             <div class="merchandise-card" onclick="openModal('<?php echo $row['foto_merchan']; ?>', '<?php echo $row['nama_merchan']; ?>', '<?php echo $row['detail_merchan']; ?>', '08123456789')">
-                <img src="/public/image/merchandise/<?php echo $row['foto_merchan']; ?>" alt="<?php echo $row['nama_merchan']; ?>">
+                <img src="public/image/merchandise/<?php echo $row['foto_merchan']; ?>" alt="<?php echo $row['nama_merchan']; ?>">
                 <h3><?php echo $row['nama_merchan']; ?></h3>
             </div>
         <?php } ?>
@@ -40,10 +40,12 @@ if (!$merchandise) {
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <img id="modalImage" src="" style="width:100%; border-radius:10px;">
-        <h3 id="modalTitle"></h3>
-        <p id="modalDesc"></p>
-        <p><strong>Kontak Pemesanan:</strong> <span id="modalContact"></span></p>
+        <div class="text">
+            <img id="modalImage" src="" style="width:100%; border-radius:10px;">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+            <p><strong>Kontak Pemesanan:</strong> <span id="modalContact"></span></p>
+        </div>
     </div>
 </div>
 
@@ -51,15 +53,27 @@ if (!$merchandise) {
 
 <script>
     function openModal(image, title, desc, contact) {
-        document.getElementById('modalImage').src = 'public/assets/' + image;
+        let modal = document.getElementById('productModal');
+        
+        document.getElementById('modalImage').src = 'public/image/merchandise/' + image;
         document.getElementById('modalTitle').innerText = title;
         document.getElementById('modalDesc').innerText = desc;
         document.getElementById('modalContact').innerText = contact;
-        document.getElementById('productModal').style.display = 'block';
+
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
     }
 
     function closeModal() {
-        document.getElementById('productModal').style.display = 'none';
+        let modal = document.getElementById('productModal');
+        
+        modal.classList.remove('show');
+
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
     }
 </script>
 </body>

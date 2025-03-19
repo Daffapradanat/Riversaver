@@ -30,6 +30,7 @@ $game = $game->fetch_assoc();
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="public/assets/datatable/datatables.min.css">
     <link rel="stylesheet" href="public/assets/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="public/assets/AOS/aos.css">
 
 </head>
 <body>
@@ -56,26 +57,17 @@ $game = $game->fetch_assoc();
         <p><strong>Genre:</strong> Adventure, Action</p>
         <p><strong>Release Date:</strong> January 2025</p>
     </div>
+</div>
 
-    <div class="slider-container">
-        <input type="radio" name="slider" id="slide1" checked>
-        <input type="radio" name="slider" id="slide2">
-        <input type="radio" name="slider" id="slide3">
-        <div class="slides">
-            <?php while ($row = $galeri->fetch_assoc()) { ?>
-                <div class="slide">
-                    <div class="image-container">
-                        <img src="<?php echo htmlspecialchars($row['foto_galeri']); ?>" alt="Game Image">
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-
-        <div class="slider-nav">
-            <label for="slide1"></label>
-            <label for="slide2"></label>
-            <label for="slide3"></label>
-        </div>
+<div class="gallery-container">
+    <h1>GALERI</h1>
+    <div class="gallery-content">
+        <?php while ($row = $galeri->fetch_assoc()) { ?>
+            <div class="gallery-item" data-aos="fade-up">
+                <img src="public/image/galeri/<?php echo htmlspecialchars($row['foto_galeri']); ?>" 
+                    alt="<?php echo htmlspecialchars($row['judul_galeri']); ?>">
+            </div>
+        <?php } ?>
     </div>
 </div>
 
@@ -85,7 +77,6 @@ $game = $game->fetch_assoc();
         <span>Welcome to Riversaver! Enjoy the game and have fun!</span>
     </div>
 </div>
-
 
 <div class="komentar-section">
     <h2>What Our Users Say</h2>
@@ -162,6 +153,22 @@ $game = $game->fetch_assoc();
 
 <script src="public/assets/datatable/datatables.min.js"></script>
 <script src="public/assets/swiper/swiper-bundle.min.js"></script>
+<script src="public/Mansory/masonry.pkgd.min.js"></script>
+<script src="public/assets/AOS/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var grid = document.querySelector('.gallery-content');
+    var msnry = new Masonry(grid, {
+      itemSelector: '.gallery-item',
+      columnWidth: 10,
+      gutter: 8,
+      percentPosition: true
+    });
+  });
+</script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     var swiper = new Swiper('.komentar-slider', {
@@ -321,48 +328,32 @@ document.addEventListener("DOMContentLoaded", function () {
         renderComments();
     });
 
-    // Animation for modal
     document.getElementById("komentarModal").addEventListener("click", function(e) {
         if (e.target === this) {
             closeKomentarModal();
         }
     });
 
-    // Initialize comments display
     renderComments();
 });
 
-// Updated modal functions
 function openKomentarModal() {
     const modal = document.getElementById("komentarModal");
-    modal.style.display = "flex";
-    modal.style.animation = "fadeIn 0.3s ease-in-out";
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    modal.classList.add("show");
+    document.body.style.overflow = "hidden";
 }
 
 function closeKomentarModal() {
     const modal = document.getElementById("komentarModal");
-    modal.style.animation = "fadeOut 0.3s ease-in-out";
+    modal.classList.remove("show");
+
+    // Tambahkan delay agar animasi berjalan smooth sebelum menghilangkan modal
     setTimeout(() => {
         modal.style.display = "none";
-        document.body.style.overflow = "auto"; // Re-enable scrolling
+        document.body.style.overflow = "auto";
     }, 300);
 }
 
-// Add these keyframe animations to your CSS
-document.head.insertAdjacentHTML('beforeend', `
-<style>
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-</style>
-`);
 </script>
 
 </body>

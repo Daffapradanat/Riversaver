@@ -38,7 +38,7 @@ if (isset($_POST['update'])) {
     $id_galeri = $_POST['id_galeri'];
     $judul = $_POST['judul_galeri'];
     $tgl = $_POST['tgl_galeri'];
-    $detail = $_POST['deskripsi_galeri'];
+    $detail = $_POST['detail_galeri'];
 
     if (!empty($_FILES['foto_galeri']['name'])) {
         $image = $_FILES['foto_galeri']['name'];
