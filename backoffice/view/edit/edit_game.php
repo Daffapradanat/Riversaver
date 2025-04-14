@@ -60,6 +60,41 @@
                     <small class="text-muted">Kosongkan jika tidak ingin mengganti foto.</small>
                 </div>
 
+                <div class="mb-3">
+                    <label for="logo" class="form-label">Logo Game</label>
+                    <?php if ($data['logo']): ?>
+                        <div class="mb-2">
+                            <img src="../../../public/image/game/<?= htmlspecialchars($data['logo']) ?>" width="100" class="img-thumbnail">
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" class="form-control" id="logo" name="logo">
+                    <small class="text-muted">Kosongkan jika tidak ingin mengganti logo.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="video_thriller" class="form-label">Video Thriller</label>
+                    <?php if ($data['video_thriller']): ?>
+                        <div class="mb-2">
+                            <video width="200" controls>
+                                <source src="../../../public/assets/video/<?= htmlspecialchars($data['video_thriller']) ?>" type="video/mp4">
+                                Browser tidak mendukung pemutar video.
+                            </video>
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" class="form-control" id="video_thriller" name="video_thriller" accept="video/*">
+                    <small class="text-muted">Kosongkan jika tidak ingin mengganti video.</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="genre" name="genre" value="<?= htmlspecialchars($data['genre']) ?>">
+                </div>
+
+                <div class="mb-3">
+                    <label for="release_date" class="form-label">Tanggal Rilis</label>
+                    <input type="date" class="form-control" id="release_date" name="release_date" value="<?= htmlspecialchars($data['release_date']) ?>">
+                </div>
+
                 <button type="submit" name="update" class="btn btn-success">Update Game</button>
                 <a href="/Riversaver_Native/backoffice/view/game.php" class="btn btn-secondary">Batal</a>
             </form>

@@ -45,6 +45,26 @@ include '../../../config/koneksi.php';
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
 
+                <div class="mb-3">
+                    <label for="logo" class="form-label">Logo Game</label>
+                    <input type="file" class="form-control" id="logo" name="logo">
+                </div>
+
+                <div class="mb-3">
+                    <label for="video_thriller" class="form-label">Video Thriller</label>
+                    <input type="file" class="form-control" id="video_thriller" name="video_thriller" accept="video/*">
+                </div>
+
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="genre" name="genre">
+                </div>
+
+                <div class="mb-3">
+                    <label for="release_date" class="form-label">Tanggal Rilis</label>
+                    <input type="date" class="form-control" id="release_date" name="release_date">
+                </div>
+
                 <input type="hidden" name="id_admin" value="1">
                 <button type="submit" name="tambah" class="btn btn-primary">Tambah Game</button>
                 <a href="/Riversaver_Native/backoffice/view/game.php" class="btn btn-secondary">Batal</a>

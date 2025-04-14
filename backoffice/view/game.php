@@ -33,6 +33,10 @@ $game = $koneksi->query("SELECT * FROM GAME");
                         <th>Versi</th>
                         <th>Spesifikasi</th>
                         <th>Foto</th>
+                        <th>Logo</th>
+                        <th>Video</th>
+                        <th>Genre</th>
+                        <th>Rilis</th>
                         <th>Detail</th>
                         <th>Aksi</th>
                     </tr>
@@ -44,6 +48,7 @@ $game = $koneksi->query("SELECT * FROM GAME");
                         <td><?= htmlspecialchars($row['judul_game']) ?></td>
                         <td><?= htmlspecialchars($row['versi']) ?></td>
                         <td><?= htmlspecialchars($row['spesifikasi']) ?></td>
+                        
                         <td>
                             <?php if ($row['image']): ?>
                                 <img src="../../public/image/game/<?= htmlspecialchars($row['image']) ?>" width="100" class="img-thumbnail">
@@ -51,7 +56,36 @@ $game = $koneksi->query("SELECT * FROM GAME");
                                 Tidak ada foto
                             <?php endif; ?>
                         </td>
+
+                        <td>
+                            <?php if ($row['logo']): ?>
+                                <img src="../../public/image/game/<?= htmlspecialchars($row['logo']) ?>" width="100" class="img-thumbnail">
+                            <?php else: ?>
+                                Tidak ada logo
+                            <?php endif; ?>
+                        </td>
+
+                        <td>
+                            <?php if ($row['video_thriller']): ?>
+                                <video width="150" controls>
+                                    <source src="../../public/assets/video/<?= htmlspecialchars($row['video_thriller']) ?>" type="video/mp4">
+                                    Browser Anda tidak mendukung tag video.
+                                </video>
+                            <?php else: ?>
+                                Tidak ada video
+                            <?php endif; ?>
+                        </td>
+
+                        <!-- Genre -->
+                        <td><?= htmlspecialchars($row['genre'] ?? '-') ?></td>
+
+                        <!-- Tanggal Rilis -->
+                        <td><?= htmlspecialchars($row['release_date'] ?? '-') ?></td>
+
+                        <!-- Detail -->
                         <td><?= substr(htmlspecialchars($row['detail_game']), 0, 100) ?>...</td>
+
+                        <!-- Aksi -->
                         <td>
                             <a href="edit/edit_game.php?id=<?= $row['id_game'] ?>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteUrl(<?= $row['id_game'] ?>)">Hapus</a>

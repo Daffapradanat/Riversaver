@@ -25,32 +25,47 @@ if (!$berita) {
 </div>
 
 <div class="news-container">
-    <h2>Berita Terbaru</h2>
+    <h1 class="news-title">news</h1>
+    <p class="news-subtitle">Inspirations<br>Providing the latest tips and ideas for business owners and designers.</p>
     <div class="news-grid">
-        <div class="news-card">
-            <img src="public/assets/poster.jpg" alt="Berita 1">
-            <h3>Judul Berita 1</h3>
-            <p class="date">20 Feb 2025</p>
-            <p>Deskripsi singkat berita 1...</p>
-            <a href="#" class="btn">Baca Selengkapnya</a>
-        </div>
-        <div class="news-card">
-            <img src="public/assets/poster.jpg" alt="Berita 2">
-            <h3>Judul Berita 2</h3>
-            <p class="date">18 Feb 2025</p>
-            <p>Deskripsi singkat berita 2...</p>
-            <a href="#" class="btn">Baca Selengkapnya</a>
-        </div>
-        <div class="news-card">
-            <img src="public/assets/poster.jpg" alt="Berita 3">
-            <h3>Judul Berita 3</h3>
-            <p class="date">15 Feb 2025</p>
-            <p>Deskripsi singkat berita 3...</p>    
-            <a href="#" class="btn">Baca Selengkapnya</a>
-        </div>
+        <?php while ($row = $berita->fetch_assoc()) { ?>
+            <div class="news-card">
+                <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>">
+                <div class="news-content">
+                    <h3><?php echo $row['judul_berita']; ?></h3>
+                    <p class="date"> <?php echo date('d M Y', strtotime($row['tgl_berita'])); ?> </p>
+                    <p><?php echo substr($row['detail_berita'], 0, 100); ?>...</p>
+                    <a href="#" class="btn">Baca Selengkapnya</a>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
 <?php include 'component/footer.php'; ?>
+
+<script>
+    function openModal(image, title, desc) {
+        let modal = document.getElementById('newsModal');
+        
+        document.getElementById('modalImage').src = 'public/image/berita/' + image;
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = desc;
+        
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+    }
+
+    function closeModal() {
+        let modal = document.getElementById('newsModal');
+        
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+</script>
 </body>
 </html>

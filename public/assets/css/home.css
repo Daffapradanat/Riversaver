@@ -292,6 +292,7 @@ main {
 .gallery-container h1 {
     text-align: center;
     padding: 10px;
+    color: white;
 }
 
 .gallery-content {

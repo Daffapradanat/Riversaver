@@ -31,7 +31,7 @@ $komentar = $koneksi->query("SELECT * FROM KOMENTAR");
                         <th>Nama Tamu</th>
                         <th>Tanggal Komentar</th>
                         <th>Komentar</th>
-                        <th>Aksi</th>
+                        <!-- <th>Aksi</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -41,9 +41,9 @@ $komentar = $koneksi->query("SELECT * FROM KOMENTAR");
                         <td><?= htmlspecialchars($row['nama_tamu']) ?></td>
                         <td><?= htmlspecialchars($row['tgl_komentar']) ?></td>
                         <td><?= substr(htmlspecialchars($row['komentar']), 0, 100) ?>...</td>
-                        <td>
+                        <!-- <td>
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteUrl(<?= $row['id_komentar'] ?>)">Hapus</a>
-                        </td>
+                        </td> -->
                     </tr>
                     <?php endwhile; ?>
                 </tbody>

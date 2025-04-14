@@ -14,17 +14,29 @@ if (isset($_POST['tambah'])) {
     $detail = $_POST['detail_game'];
     $versi = $_POST['versi'];
     $spesifikasi = $_POST['spesifikasi'];
-    // $id_admin = $_POST['id_admin']; 
+    $release_date = $_POST['release_date'];
+    $genre = $_POST['genre'];
 
     $image = $_FILES['image']['name'];
-    $tmp = $_FILES['image']['tmp_name'];
-    $folder = "../../public/image/game/";
-    move_uploaded_file($tmp, $folder . $image);
+    $tmp_image = $_FILES['image']['tmp_name'];
+    $folder_image = "../../public/image/game/";
+    move_uploaded_file($tmp_image, $folder_image . $image);
 
-    $sql = "INSERT INTO GAME (id_admin, judul_game, image, detail_game, versi, spesifikasi)
-            VALUES ('$id_admin', '$judul', '$image', '$detail', '$versi', '$spesifikasi')";
+    $logo = $_FILES['logo']['name'];
+    $tmp_logo = $_FILES['logo']['tmp_name'];
+    move_uploaded_file($tmp_logo, $folder_image . $logo);
+
+    $video = $_FILES['video_thriller']['name'];
+    $tmp_video = $_FILES['video_thriller']['tmp_name'];
+    $folder_video = "../../public/assets/video/";
+    move_uploaded_file($tmp_video, $folder_video . $video);
+
+    $sql = "INSERT INTO GAME 
+            (id_admin, judul_game, image, detail_game, versi, spesifikasi, release_date, genre, video_thriller, logo)
+            VALUES 
+            ('$id_admin', '$judul', '$image', '$detail', '$versi', '$spesifikasi', '$release_date', '$genre', '$video', '$logo')";
+    
     $koneksi->query($sql);
-
     header("Location: ../view/game.php");
 }
 
@@ -32,7 +44,6 @@ if (isset($_GET['hapus'])) {
     $id_game = $_GET['hapus'];
     $sql = "DELETE FROM GAME WHERE id_game='$id_game'";
     $koneksi->query($sql);
-
     header("Location: ../view/game.php");
 }
 
@@ -42,18 +53,41 @@ if (isset($_POST['update'])) {
     $detail = $_POST['detail_game'];
     $versi = $_POST['versi'];
     $spesifikasi = $_POST['spesifikasi'];
+    $release_date = $_POST['release_date'];
+    $genre = $_POST['genre'];
+
+    $sql = "UPDATE GAME SET 
+                judul_game='$judul', 
+                detail_game='$detail', 
+                versi='$versi', 
+                spesifikasi='$spesifikasi', 
+                release_date='$release_date',
+                genre='$genre'";
 
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
-        $tmp = $_FILES['image']['tmp_name'];
-        $folder = "../../public/image/game/";
-        move_uploaded_file($tmp, $folder . $image);
-
-        $sql = "UPDATE GAME SET judul_game='$judul', image='$image', detail_game='$detail', versi='$versi', spesifikasi='$spesifikasi' WHERE id_game='$id_game'";
-    } else {
-        $sql = "UPDATE GAME SET judul_game='$judul', detail_game='$detail', versi='$versi', spesifikasi='$spesifikasi' WHERE id_game='$id_game'";
+        $tmp_image = $_FILES['image']['tmp_name'];
+        $folder_image = "../../public/image/game/";
+        move_uploaded_file($tmp_image, $folder_image . $image);
+        $sql .= ", image='$image'";
     }
 
+    if (!empty($_FILES['logo']['name'])) {
+        $logo = $_FILES['logo']['name'];
+        $tmp_logo = $_FILES['logo']['tmp_name'];
+        move_uploaded_file($tmp_logo, $folder_image . $logo);
+        $sql .= ", logo='$logo'";
+    }
+
+    if (!empty($_FILES['video_thriller']['name'])) {
+        $video = $_FILES['video_thriller']['name'];
+        $tmp_video = $_FILES['video_thriller']['tmp_name'];
+        $folder_video = "../../public/assets/video/";
+        move_uploaded_file($tmp_video, $folder_video . $video);
+        $sql .= ", video_thriller='$video'";
+    }
+
+    $sql .= " WHERE id_game='$id_game'";
     $koneksi->query($sql);
     header("Location: ../view/game.php");
 }
