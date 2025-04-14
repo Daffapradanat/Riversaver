@@ -31,10 +31,13 @@ if (isset($_POST['tambah'])) {
     $folder_video = "../../public/assets/video/";
     move_uploaded_file($tmp_video, $folder_video . $video);
 
-    $sql = "INSERT INTO GAME 
-            (id_admin, judul_game, image, detail_game, versi, spesifikasi, release_date, genre, video_thriller, logo)
-            VALUES 
-            ('$id_admin', '$judul', '$image', '$detail', '$versi', '$spesifikasi', '$release_date', '$genre', '$video', '$logo')";
+    $videoDoc = $_FILES['video_documentation']['name'];
+    $tmpVideoDoc = $_FILES['video_documentation']['tmp_name'];
+    $videoDocPath = "../../public/assets/video/";
+    move_uploaded_file($tmpVideoDoc, $videoDocPath . $videoDoc);
+
+    $sql = "INSERT INTO GAME (id_admin, judul_game, image, detail_game, versi, spesifikasi, release_date, genre, video_thriller, logo, video_documentation)
+    VALUES ('$id_admin', '$judul', '$image', '$detail', '$versi', '$spesifikasi', '$release_date', '$genre', '$videoThriller', '$logo', '$videoDoc')";
     
     $koneksi->query($sql);
     header("Location: ../view/game.php");
@@ -85,6 +88,14 @@ if (isset($_POST['update'])) {
         $folder_video = "../../public/assets/video/";
         move_uploaded_file($tmp_video, $folder_video . $video);
         $sql .= ", video_thriller='$video'";
+    }
+
+    if (!empty($_FILES['video_documentation']['name'])) {
+        $videoDoc = $_FILES['video_documentation']['name'];
+        $tmpVideoDoc = $_FILES['video_documentation']['tmp_name'];
+        $videoDocPath = "../../public/assets/video/";
+        move_uploaded_file($tmpVideoDoc, $videoDocPath . $videoDoc);
+        $sql .= ", video_documentation='$videoDoc'";
     }
 
     $sql .= " WHERE id_game='$id_game'";

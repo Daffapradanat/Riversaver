@@ -56,6 +56,11 @@ include '../../../config/koneksi.php';
                 </div>
 
                 <div class="mb-3">
+                    <label for="video_documentation" class="form-label">Video Dokumentasi</label>
+                    <input type="file" class="form-control" id="video_documentation" name="video_documentation" accept="video/*">
+                </div>
+
+                <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
                     <input type="text" class="form-control" id="genre" name="genre">
                 </div>

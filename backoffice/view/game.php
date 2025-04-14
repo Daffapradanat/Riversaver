@@ -34,7 +34,8 @@ $game = $koneksi->query("SELECT * FROM GAME");
                         <th>Spesifikasi</th>
                         <th>Foto</th>
                         <th>Logo</th>
-                        <th>Video</th>
+                        <th>Video Game</th>
+                        <th>Dokumentasi</th>
                         <th>Genre</th>
                         <th>Rilis</th>
                         <th>Detail</th>
@@ -76,16 +77,23 @@ $game = $koneksi->query("SELECT * FROM GAME");
                             <?php endif; ?>
                         </td>
 
-                        <!-- Genre -->
+                        <td>
+                            <?php if ($row['video_documentation']): ?>
+                                <video width="150" controls>
+                                    <source src="../../public/assets/video/<?= htmlspecialchars($row['video_documentation']) ?>" type="video/mp4">
+                                    Browser Anda tidak mendukung tag video.
+                                </video>
+                            <?php else: ?>
+                                Tidak ada video
+                            <?php endif; ?>
+                        </td>
+
                         <td><?= htmlspecialchars($row['genre'] ?? '-') ?></td>
 
-                        <!-- Tanggal Rilis -->
                         <td><?= htmlspecialchars($row['release_date'] ?? '-') ?></td>
 
-                        <!-- Detail -->
                         <td><?= substr(htmlspecialchars($row['detail_game']), 0, 100) ?>...</td>
 
-                        <!-- Aksi -->
                         <td>
                             <a href="edit/edit_game.php?id=<?= $row['id_game'] ?>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteUrl(<?= $row['id_game'] ?>)">Hapus</a>

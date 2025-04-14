@@ -86,6 +86,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="video_documentation" class="form-label">Video Dokumentasi</label>
+                    <?php if ($data['video_documentation']): ?>
+                        <div class="mb-2">
+                            <video width="200" controls>
+                                <source src="../../../public/assets/video/<?= htmlspecialchars($data['video_documentation']) ?>" type="video/mp4">
+                                Browser tidak mendukung pemutar video.
+                            </video>
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" class="form-control" id="video_documentation" name="video_documentation" accept="video/*">
+                    <small class="text-muted">Kosongkan jika tidak ingin mengganti video dokumentasi.</small>
+                </div>
+
+                <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
                     <input type="text" class="form-control" id="genre" name="genre" value="<?= htmlspecialchars($data['genre']) ?>">
                 </div>
