@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="public/assets/css/home.css">
 <footer class="footer">
         <div class="footer-content">
             <div class="logo-game">
-                <img src="/Riversaver_Native/public/assets/logo.png" alt="Logo" class="footer-logo">
+                <img src="<?= htmlspecialchars($logo) ?>" alt="Game Logo" class="footer-logo">
             </div>
             <div class="footer-left">
                 <h3>Contact Person</h3>

@@ -12,7 +12,8 @@ if (!$game) {
 }
 
 $game = $game->fetch_assoc(); 
-$logo = "public/image/game/" . $game['logo'];
+$imagePath = isset($game['image']) && $game['image'] ? "public/image/game/" . $game['image'] : 'public/assets/default-logo.png';
+$logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['logo'] : 'public/assets/default-logo.png';
 
 ?>
 
@@ -21,7 +22,7 @@ $logo = "public/image/game/" . $game['logo'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riversaver</title>
+    <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/store.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
 
@@ -29,27 +30,32 @@ $logo = "public/image/game/" . $game['logo'];
 <body>
 <?php include 'component/header.php'; ?>
 
-<div class="dashboard-content">
-    <div class="fade-1"></div>
-</div>
 
-<div class="merchandise-container">
-    <h2>Merchandise Store</h2>
-    <div class="merchandise-grid">
-        <?php while ($row = $merchandise->fetch_assoc()) { ?>
-            <div class="merchandise-card" onclick="openModal('<?php echo $row['foto_merchan']; ?>', '<?php echo $row['nama_merchan']; ?>', '<?php echo $row['detail_merchan']; ?>', '08123456789')">
-                <img src="public/image/merchandise/<?php echo $row['foto_merchan']; ?>" alt="<?php echo $row['nama_merchan']; ?>">
-                <h3><?php echo $row['nama_merchan']; ?></h3>
-            </div>
-        <?php } ?>
+<div class="dashboard-content">
+    <div class="merchandise-container">
+        <h2>Merchandise Store</h2>
+        <div class="merchandise-grid">
+            <?php if ($merchandise->num_rows > 0) { ?>
+                <?php while ($row = $merchandise->fetch_assoc()) { ?>
+                    <div class="merchandise-card" onclick="openModal('<?php echo $row['foto_merchan']; ?>', '<?php echo $row['nama_merchan']; ?>', '<?php echo $row['detail_merchan']; ?>', '08123456789')">
+                        <img src="public/image/merchandise/<?php echo $row['foto_merchan']; ?>" alt="<?php echo $row['nama_merchan']; ?>">
+                        <h3><?php echo $row['nama_merchan']; ?></h3>
+                    </div>
+                <?php } ?>
+            <?php } else { ?>
+                <p class="no-merchandise">No merchandise available.</p>
+            <?php } ?>
+        </div>
     </div>
 </div>
 
 <div id="productModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-store">
+        <span class="close-store" onclick="closeModal()">&times;</span>
+        
+        <img id="modalImage" class="modal-img" src="" alt="">
+
         <div class="text">
-            <img id="modalImage" src="" style="width:100%; border-radius:10px;">
             <h3 id="modalTitle"></h3>
             <p id="modalDesc"></p>
             <p><strong>Kontak Pemesanan:</strong> <span id="modalContact"></span></p>

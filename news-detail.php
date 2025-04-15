@@ -10,7 +10,9 @@ if (!$game) {
     die("Error mengambil data GAME: " . $koneksi->error);
 }
 $game = $game->fetch_assoc(); 
-$logo = "public/image/game/" . $game['logo'];
+$imagePath = isset($game['image']) && $game['image'] ? "public/image/game/" . $game['image'] : 'public/assets/default-logo.png';
+$logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['logo'] : 'public/assets/default-logo.png';
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@ $logo = "public/image/game/" . $game['logo'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($game['judul_game']); ?></title>
+    <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/news-details.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="public/assets/datatable/datatables.min.css">
@@ -30,17 +32,16 @@ $logo = "public/image/game/" . $game['logo'];
 <?php include 'component/header.php'; ?>
 
     <div class="dashboard-content">
-        <div class="fade-1"></div>
-    </div>
-    <div class="detail-container">
-        <h1 class="detail-title"><?php echo $berita['judul_berita']; ?></h1>
-        <p class="detail-date"><?php echo date('d M Y', strtotime($berita['tgl_berita'])); ?></p>
-        <img class="detail-image" src="public/image/berita/<?php echo $berita['foto_berita']; ?>" alt="<?php echo $berita['judul_berita']; ?>">
-        <div class="detail-content">
-            <?php echo nl2br($berita['detail_berita']); ?>
-        </div>
+        <div class="detail-container">
+            <h1 class="detail-title"><?php echo $berita['judul_berita']; ?></h1>
+            <p class="detail-date"><?php echo date('d M Y', strtotime($berita['tgl_berita'])); ?></p>
+            <img class="detail-image" src="public/image/berita/<?php echo $berita['foto_berita']; ?>" alt="<?php echo $berita['judul_berita']; ?>">
+            <div class="detail-content">
+                <?php echo nl2br($berita['detail_berita']); ?>
+            </div>
 
-        <a href="javascript:history.back()" class="back-button">← Back</a>
+            <a href="javascript:history.back()" class="back-button">← Back</a>
+        </div>
     </div>
 
 <?php include 'component/footer.php'; ?>

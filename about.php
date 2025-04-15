@@ -12,12 +12,17 @@ if (!$game) {
 }
 
 $pembuat = $pembuat->fetch_assoc(); 
-$pembuatPath = "public/image/pembuat/" . $pembuat['foto_pembuat'];
+$pembuatPath = isset($pembuat['foto_pembuat']) && $pembuat['foto_pembuat'] ? "public/image/pembuat/" . $pembuat['foto_pembuat'] : 'public/assets/profile.png';
 
-$game = $game->fetch_assoc(); 
-$logo = "public/image/game/" . $game['logo'];
-$videoPath = "public/assets/video/" . $game['video_thriller'];
-$documentationPath = "public/assets/video/" . $game['video_documentation'];
+if ($game) {
+    $game = $game->fetch_assoc();
+} else {
+    die("Error fetching game data");
+}
+
+$logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['logo'] : 'public/assets/default-logo.png';
+$videoPath = isset($game['video_thriller']) && $game['video_thriller'] ? "public/assets/video/" . $game['video_thriller'] : '';
+$documentationPath = isset($game['video_thriller']) && $game['video_documentation'] ? "public/assets/video/" . $game['video_documentation'] : '';
 
 ?>
 
@@ -26,7 +31,7 @@ $documentationPath = "public/assets/video/" . $game['video_documentation'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riversaver</title>
+    <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/about.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
 
@@ -50,9 +55,9 @@ $documentationPath = "public/assets/video/" . $game['video_documentation'];
     </div>
 
     <div class="profile-info">
-        <h2> <?php echo htmlspecialchars($pembuat['nama_pembuat']); ?></h2>
-        <p> <?php echo htmlspecialchars($pembuat['pendidikan_pembuat']); ?></p>
-        <p> <?php echo htmlspecialchars($pembuat['detail_pembuat']); ?></p>
+        <h2><?= htmlspecialchars($pembuat['nama_pembuat'] ?? 'Unknown Creator') ?></h2>
+        <p><?= htmlspecialchars($pembuat['pendidikan_pembuat'] ?? 'No education information available') ?></p>
+        <p><?= htmlspecialchars($pembuat['detail_pembuat'] ?? 'No details available for the creator') ?></p>
     </div>
 </div>
 

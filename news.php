@@ -12,7 +12,8 @@ if (!$game) {
 }
 
 $game = $game->fetch_assoc(); 
-$logo = "public/image/game/" . $game['logo'];
+$imagePath = isset($game['image']) && $game['image'] ? "public/image/game/" . $game['image'] : 'public/assets/default-logo.png';
+$logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['logo'] : 'public/assets/default-logo.png';
 
 ?>
 
@@ -21,32 +22,32 @@ $logo = "public/image/game/" . $game['logo'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berita - <?php echo htmlspecialchars($game['judul_game']); ?></title>
+    <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/news.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
 </head>
 <body>
 <?php include 'component/header.php'; ?>
 
-<div class="dashboard-content">
-    <div class="fade-1"></div>
-</div>
-
-<div class="news-container">
-    <h1 class="news-title">News</h1>
-    <div class="news-grid">
-        <?php while ($row = $berita->fetch_assoc()) { ?>
-            <a href="news-detail.php?id=<?php echo $row['id_berita']; ?>" class="news-card-vertical">
-                <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>" class="news-image-banner">
-                <div class="news-body">
-                    <h3 class="news-heading"><?php echo $row['judul_berita']; ?></h3>
-                    <p class="news-snippet"><?php echo substr($row['detail_berita'], 0, 120); ?>...</p>
-                    <span class="news-date"><?php echo date('d M Y', strtotime($row['tgl_berita'])); ?></span>
-                </div>
-            </a>
-        <?php } ?>
+    <div class="news-container">
+        <h2 class="news-title">News</h2>
+        <div class="news-grid">
+            <?php if ($berita->num_rows > 0) { ?>
+                <?php while ($row = $berita->fetch_assoc()) { ?>
+                    <a href="news-detail.php?id=<?php echo $row['id_berita']; ?>" class="news-card-vertical">
+                        <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>" class="news-image-banner">
+                        <div class="news-body">
+                            <h3 class="news-heading"><?php echo $row['judul_berita']; ?></h3>
+                            <p class="news-snippet"><?php echo substr($row['detail_berita'], 0, 120); ?>...</p>
+                            <span class="news-date"><?php echo date('d M Y', strtotime($row['tgl_berita'])); ?></span>
+                        </div>
+                    </a>
+                <?php } ?>
+            <?php } else { ?>
+                <p class="no-news">No news available.</p>
+            <?php } ?>
+        </div>
     </div>
-</div>
 
 <?php include 'component/footer.php'; ?>
 

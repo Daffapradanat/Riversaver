@@ -1,10 +1,11 @@
 <?php
 include 'config/koneksi.php';
 
-$game = $koneksi->query("SELECT * FROM GAME");
-if (!$game) {
+$gameQuery = $koneksi->query("SELECT * FROM GAME LIMIT 1");
+if (!$gameQuery) {
     die("Error mengambil data GAME: " . $koneksi->error);
 }
+$game = $gameQuery->fetch_assoc();
 
 $galeri = $koneksi->query("SELECT * FROM GALERI");
 if (!$galeri) {
@@ -16,13 +17,27 @@ if (!$komentar) {
     die("Error mengambil data KOMENTAR: " . $koneksi->error);
 }
 
-$game = $game->fetch_assoc(); 
-$logo = "public/image/game/" . $game['logo'];
-$videoPath = "public/assets/video/" . $game['video_thriller'];
-$imagePath = "public/image/game/" . $game['image'];
-$tanggal = strtotime($game['release_date']);
-$formattedDate = date('d F Y', $tanggal); 
+$logo = !empty($game['logo']) 
+    ? "public/image/game/" . $game['logo'] 
+    : "public/assets/default-logo.png";
 
+$videoPath = !empty($game['video_thriller']) 
+    ? "public/assets/video/" . $game['video_thriller'] 
+    : '';
+
+$imagePath = !empty($game['image']) 
+    ? "public/image/game/" . $game['image'] 
+    : "public/assets/default-logo.png";
+
+$formattedDate = !empty($game['release_date']) && strtotime($game['release_date']) 
+    ? date('d F Y', strtotime($game['release_date'])) 
+    : 'Unknown release date';
+
+function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') {
+    return !empty($date) && strtotime($date) 
+        ? date($format, strtotime($date)) 
+        : $fallback;
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +45,9 @@ $formattedDate = date('d F Y', $tanggal);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($game['judul_game']); ?></title>
+    <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/home.css">
-    <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
+    <link rel="icon" href="public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="public/assets/datatable/datatables.min.css">
     <link rel="stylesheet" href="public/assets/swiper/package/swiper-bundle.min.css">
     <link rel="stylesheet" href="public/assets/AOS/dist/aos.css">
@@ -53,14 +68,16 @@ $formattedDate = date('d F Y', $tanggal);
     <div class="fade-1"></div>
 </div>
 
-<div class="description-game"><?php echo htmlspecialchars($game['detail_game']); ?></div>
+<div class="description-game">
+    <?= htmlspecialchars($game['detail_game'] ?? 'No description available for this game.') ?>
+</div>
 
 <div class="general-info">
     <h1>General Info</h1>
     <div class="info-details">
-        <p><strong>Version:</strong> <?php echo htmlspecialchars($game['versi']); ?></p>
-        <p><strong>Genre:</strong> <?php echo htmlspecialchars($game['genre']); ?></p>
-        <p><strong>Release Date:</strong> <?= $formattedDate ?></p>
+        <p><strong>Version:</strong> <?= htmlspecialchars($game['versi'] ?? 'Unknown version') ?></p>
+        <p><strong>Genre:</strong> <?= htmlspecialchars($game['genre'] ?? 'Genre not specified') ?></p>
+        <p><strong>Release Date:</strong> <?= safeDate($game['tanggal_rilis'] ?? null) ?></p>
     </div>
 </div>
 
@@ -352,7 +369,6 @@ function closeKomentarModal() {
     const modal = document.getElementById("komentarModal");
     modal.classList.remove("show");
 
-    // Tambahkan delay agar animasi berjalan smooth sebelum menghilangkan modal
     setTimeout(() => {
         modal.style.display = "none";
         document.body.style.overflow = "auto";
@@ -360,6 +376,5 @@ function closeKomentarModal() {
 }
 
 </script>
-
 </body>
 </html>
