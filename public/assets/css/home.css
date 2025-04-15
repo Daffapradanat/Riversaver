@@ -407,7 +407,6 @@ main {
     }
 }
 
-/* Redesigned Komentar (Comments) Section */
 .komentar-section {
     display: flex;
     flex-direction: column;

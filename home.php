@@ -96,12 +96,12 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
     </div>
 </div>
 
-<div id="galleryModal" class="gallery-modal">
-    <div class="gallery-modal-store">
-        <span class="gallery-close-store" onclick="closeGallery()">&times;</span>
+<div id="galleryModal" class="modal">
+    <div class="modal-store">
+        <span class="close-store" onclick="closeGallery()">&times;</span>
         
-        <img id="modalImage" class="gallery-modal-img" src="" alt="">
-        <div class="gallery-text">
+        <img id="modalImage" class="modal-img" src="" alt="">
+        <div class="text">
             <h3 id="modalTitle"></h3>
             <p id="modalDesc"></p>
         </div>
