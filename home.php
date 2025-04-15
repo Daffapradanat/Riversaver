@@ -85,11 +85,26 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
     <h1>GALERI</h1>
     <div class="gallery-content">
         <?php while ($row = $galeri->fetch_assoc()) { ?>
-            <div class="gallery-item" data-aos="fade-up">
+            <div class="gallery-item" 
+                data-aos="fade-up"
+                onclick="openGallery('<?php echo htmlspecialchars(addslashes($row['foto_galeri'])); ?>', '<?php echo htmlspecialchars(addslashes($row['judul_galeri'])); ?>', '<?php echo htmlspecialchars(addslashes($row['detail_galeri'])); ?>')">
+
                 <img src="public/image/galeri/<?php echo htmlspecialchars($row['foto_galeri']); ?>" 
                     alt="<?php echo htmlspecialchars($row['judul_galeri']); ?>">
             </div>
         <?php } ?>
+    </div>
+</div>
+
+<div id="galleryModal" class="gallery-modal">
+    <div class="gallery-modal-store">
+        <span class="gallery-close-store" onclick="closeGallery()">&times;</span>
+        
+        <img id="modalImage" class="gallery-modal-img" src="" alt="">
+        <div class="gallery-text">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+        </div>
     </div>
 </div>
 
@@ -190,6 +205,24 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
       percentPosition: true
     });
   });
+
+  function openGallery(image, title, desc) {
+        document.getElementById('modalImage').src = 'public/image/galeri/' + image;
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = desc;
+        document.getElementById('galleryModal').style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('galleryModal').classList.add('show');
+        }, 10);
+    }
+
+    function closeGallery() {
+        const modal = document.getElementById('galleryModal');
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
