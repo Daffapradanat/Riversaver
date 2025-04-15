@@ -17,6 +17,11 @@ if (!$komentar) {
 }
 
 $game = $game->fetch_assoc(); 
+$logo = "public/image/game/" . $game['logo'];
+$videoPath = "public/assets/video/" . $game['video_thriller'];
+$imagePath = "public/image/game/" . $game['image'];
+$tanggal = strtotime($game['release_date']);
+$formattedDate = date('d F Y', $tanggal); 
 
 ?>
 
@@ -25,25 +30,25 @@ $game = $game->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riversaver</title>
+    <title><?php echo htmlspecialchars($game['judul_game']); ?></title>
     <link rel="stylesheet" href="public/assets/css/home.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="public/assets/datatable/datatables.min.css">
-    <link rel="stylesheet" href="public/assets/swiper/swiper-bundle.min.css">
-    <link rel="stylesheet" href="public/assets/AOS/aos.css">
+    <link rel="stylesheet" href="public/assets/swiper/package/swiper-bundle.min.css">
+    <link rel="stylesheet" href="public/assets/AOS/dist/aos.css">
 
 </head>
 <body>
 <?php include 'component/header.php'; ?>
 
 <div class="dashboard-content">
-    <div class="logo-container"></div>
+    <div class="logo-container" style="background-image: url('<?= htmlspecialchars($imagePath) ?>');"></div>
     <button class="download-btn">
         <span>Download</span>
         <div class="liquid"></div>
     </button>
     <div class="video-container">
-        <video class="dashboard-video" src="public/assets/video/contoh video.mp4" autoplay muted loop></video>
+        <video class="dashboard-video" src="<?= $videoPath ?>" autoplay muted loop></video>
     </div>
     <div class="fade-1"></div>
 </div>
@@ -54,8 +59,8 @@ $game = $game->fetch_assoc();
     <h1>General Info</h1>
     <div class="info-details">
         <p><strong>Version:</strong> <?php echo htmlspecialchars($game['versi']); ?></p>
-        <p><strong>Genre:</strong> Adventure, Action</p>
-        <p><strong>Release Date:</strong> January 2025</p>
+        <p><strong>Genre:</strong> <?php echo htmlspecialchars($game['genre']); ?></p>
+        <p><strong>Release Date:</strong> <?= $formattedDate ?></p>
     </div>
 </div>
 
@@ -152,9 +157,9 @@ $game = $game->fetch_assoc();
 <?php include 'component/footer.php'; ?>
 
 <script src="public/assets/datatable/datatables.min.js"></script>
-<script src="public/assets/swiper/swiper-bundle.min.js"></script>
-<script src="public/Mansory/masonry.pkgd.min.js"></script>
-<script src="public/assets/AOS/aos.js"></script>
+<script src="public/assets/swiper/package/swiper-bundle.min.js"></script>
+<script src="public/assets/Masonry/masonry.pkgd.min.js"></script>
+<script src="public/assets/AOS/dist/aos.js"></script>
 <script>
   AOS.init();
 </script>

@@ -6,6 +6,19 @@ if (!$pembuat) {
     die("Error mengambil data PEMBUAT: " . $koneksi->error);
 }
 
+$game = $koneksi->query("SELECT * FROM GAME");
+if (!$game) {
+    die("Error mengambil data GAME: " . $koneksi->error);
+}
+
+$pembuat = $pembuat->fetch_assoc(); 
+$pembuatPath = "public/image/pembuat/" . $pembuat['foto_pembuat'];
+
+$game = $game->fetch_assoc(); 
+$logo = "public/image/game/" . $game['logo'];
+$videoPath = "public/assets/video/" . $game['video_thriller'];
+$documentationPath = "public/assets/video/" . $game['video_documentation'];
+
 ?>
 
 <!DOCTYPE html>
@@ -26,20 +39,20 @@ if (!$pembuat) {
 </div>
 <div class="dashboard-content">
     <div class="video-container">
-        <video class="dashboard-video" src="public/assets/video/contoh video.mp4" autoplay muted loop></video>
+        <video class="dashboard-video" src="<?= $videoPath ?>" autoplay muted loop></video>
     </div>
     <div class="fade-1"></div>
 </div>
 
 <div class="profile-container">
     <div class="profile-img">
-        <img src="public/assets/statue.png" alt="Profile Image">
+        <img src="<?= $pembuatPath ?>" alt="Profile Image">
     </div>
 
     <div class="profile-info">
-        <h2>John Doe</h2>
-        <p>Web Developer | Enthusiast</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h2> <?php echo htmlspecialchars($pembuat['nama_pembuat']); ?></h2>
+        <p> <?php echo htmlspecialchars($pembuat['pendidikan_pembuat']); ?></p>
+        <p> <?php echo htmlspecialchars($pembuat['detail_pembuat']); ?></p>
     </div>
 </div>
 
@@ -55,7 +68,7 @@ if (!$pembuat) {
 
     <div class="doc-item">
         <div class="doc-video">
-            <video src="public/assets/video/contoh video.mp4" controls></video>
+            <video src="<?= $videoPath ?>" controls></video>
         </div>
         <div class="doc-text">
             <h3>Our Beginnings</h3>
@@ -69,7 +82,7 @@ if (!$pembuat) {
             <p>Get an exclusive look at our creative process, innovation, and passion for development.</p>
         </div>
         <div class="doc-video">
-            <video src="public/assets/video/contoh video.mp4" controls></video>
+            <video src="<?= $documentationPath ?>" controls></video>
         </div>
     </div>
 </div>

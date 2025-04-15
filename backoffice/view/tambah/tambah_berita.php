@@ -26,11 +26,6 @@ include '../../../config/koneksi.php';
                 </div>
 
                 <div class="mb-3">
-                    <label for="tgl_berita" class="form-label">Tanggal Berita</label>
-                    <input type="date" class="form-control" id="tgl_berita" name="tgl_berita" required>
-                </div>
-
-                <div class="mb-3">
                     <label for="detail_berita" class="form-label">Detail Berita</label>
                     <textarea class="form-control" id="detail_berita" name="detail_berita" rows="5" required></textarea>
                 </div>

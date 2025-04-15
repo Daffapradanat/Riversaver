@@ -1,8 +1,8 @@
     <header class="navbar">
         <div class="island">
             <div class="logo">
-                <img src="public/assets/logo.png" alt="Logo Riversaver">
-                <a href="home.php">Riversaver</a>
+                <img src="<?= htmlspecialchars($logo) ?>" alt="Game Logo" class="logo-img">
+                <a href="home.php"><?php echo htmlspecialchars($game['judul_game']); ?></a>
             </div>
             <nav class="menu">
                 <ul>

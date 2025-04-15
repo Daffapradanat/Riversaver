@@ -26,17 +26,12 @@
             }
             ?>
 
-            <form action="../controller/beritaController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/beritaController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_berita" value="<?= $data['id_berita'] ?>">
 
                 <div class="mb-3">
                     <label for="judul_berita" class="form-label">Judul Berita</label>
                     <input type="text" class="form-control" id="judul_berita" name="judul_berita" value="<?= htmlspecialchars($data['judul_berita']) ?>" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="tgl_berita" class="form-label">Tanggal Berita</label>
-                    <input type="date" class="form-control" id="tgl_berita" name="tgl_berita" value="<?= $data['tgl_berita'] ?>" required>
                 </div>
 
                 <div class="mb-3">

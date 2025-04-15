@@ -26,7 +26,7 @@
             }
             ?>
 
-            <form action="../../controller/beritaController.php" method="POST" enctype="multipart/form-data">
+            <form action="../../controller/pembuatController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id_pembuat" value="<?= $data['id_pembuat'] ?>">
 
                 <div class="mb-3">
@@ -40,8 +40,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="detail_berita" class="form-label">Detail Pembuat</label>
-                    <textarea class="form-control" id="detail_berita" name="detail_berita" rows="5" required><?= htmlspecialchars($data['detail_berita']) ?></textarea>
+                    <label for="detail_pembuat" class="form-label">Detail Pembuat</label>
+                    <textarea class="form-control" id="detail_pembuat" name="detail_pembuat" rows="5" required><?= htmlspecialchars($data['detail_pembuat']) ?></textarea>
                 </div>
 
                 <div class="mb-3">

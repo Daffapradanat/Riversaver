@@ -6,6 +6,14 @@ if (!$berita) {
     die("Error mengambil data BERITA: " . $koneksi->error);
 }
 
+$game = $koneksi->query("SELECT * FROM GAME");
+if (!$game) {
+    die("Error mengambil data GAME: " . $koneksi->error);
+}
+
+$game = $game->fetch_assoc(); 
+$logo = "public/image/game/" . $game['logo'];
+
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +21,7 @@ if (!$berita) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Berita - Riversaver</title>
+    <title>Berita - <?php echo htmlspecialchars($game['judul_game']); ?></title>
     <link rel="stylesheet" href="public/assets/css/news.css">
     <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
 </head>
@@ -25,19 +33,17 @@ if (!$berita) {
 </div>
 
 <div class="news-container">
-    <h1 class="news-title">news</h1>
-    <p class="news-subtitle">Inspirations<br>Providing the latest tips and ideas for business owners and designers.</p>
+    <h1 class="news-title">News</h1>
     <div class="news-grid">
         <?php while ($row = $berita->fetch_assoc()) { ?>
-            <div class="news-card">
-                <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>">
-                <div class="news-content">
-                    <h3><?php echo $row['judul_berita']; ?></h3>
-                    <p class="date"> <?php echo date('d M Y', strtotime($row['tgl_berita'])); ?> </p>
-                    <p><?php echo substr($row['detail_berita'], 0, 100); ?>...</p>
-                    <a href="#" class="btn">Baca Selengkapnya</a>
+            <a href="news-detail.php?id=<?php echo $row['id_berita']; ?>" class="news-card-vertical">
+                <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>" class="news-image-banner">
+                <div class="news-body">
+                    <h3 class="news-heading"><?php echo $row['judul_berita']; ?></h3>
+                    <p class="news-snippet"><?php echo substr($row['detail_berita'], 0, 120); ?>...</p>
+                    <span class="news-date"><?php echo date('d M Y', strtotime($row['tgl_berita'])); ?></span>
                 </div>
-            </div>
+            </a>
         <?php } ?>
     </div>
 </div>
@@ -46,12 +52,15 @@ if (!$berita) {
 
 <script>
     function openModal(image, title, desc) {
-        let modal = document.getElementById('newsModal');
-        
-        document.getElementById('modalImage').src = 'public/image/berita/' + image;
-        document.getElementById('modalTitle').innerText = title;
-        document.getElementById('modalDesc').innerText = desc;
-        
+        const modal = document.getElementById('newsModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+
+        modalImage.src = `public/image/berita/${image}`;
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+
         modal.style.display = 'flex';
         setTimeout(() => {
             modal.classList.add('show');
@@ -59,8 +68,8 @@ if (!$berita) {
     }
 
     function closeModal() {
-        let modal = document.getElementById('newsModal');
-        
+        const modal = document.getElementById('newsModal');
+
         modal.classList.remove('show');
         setTimeout(() => {
             modal.style.display = 'none';

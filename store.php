@@ -6,6 +6,14 @@ if (!$merchandise) {
     die("Error mengambil data MERCHANDISE: " . $koneksi->error);
 }
 
+$game = $koneksi->query("SELECT * FROM GAME");
+if (!$game) {
+    die("Error mengambil data GAME: " . $koneksi->error);
+}
+
+$game = $game->fetch_assoc(); 
+$logo = "public/image/game/" . $game['logo'];
+
 ?>
 
 <!DOCTYPE html>

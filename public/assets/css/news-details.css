@@ -102,87 +102,65 @@ body {
     pointer-events: none;
 }
 
-
-main {
+.detail-container {
+    max-width: 900px;
+    margin: 50px auto;
     padding: 20px;
-    min-height: calc(100vh - 140px);
-}
-
-.news-title {
-    color: white;
-    font-size: 60px;
-    font-weight: bold;
-    text-align: center;
-    padding: 20px;
-    margin: 0 auto;
-    display: block;
-    width: fit-content;
-}
-
-.news-subtitle {
-    font-size: 20px;
-    text-align: right;
-    margin-right: 5%;
-}
-
-.news-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    width: 90%;
-    margin: 0 auto;
-}
-
-.news-card-vertical {
-    display: flex;
-    flex-direction: column;
     background-color: rgb(14, 14, 14);
     border-radius: 12px;
-    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.detail-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.detail-date {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.detail-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.detail-content {
+    font-size: 18px;
+    color: #ddd;
+    white-space: pre-line;
+}
+
+.back-button {
+    margin-top: 40px;
+    display: inline-block;
+    background-color: #444;
+    padding: 12px 20px;
+    border-radius: 6px;
     color: white;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease;
 }
 
-.news-card-vertical:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.back-button:hover {
+    background-color: #0e0068;
 }
 
-.news-image-banner {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
+@media (max-width: 768px) {
+    .detail-title {
+        font-size: 28px;
+    }
 
-.news-body {
-    padding: 20px;
-}
-
-.news-heading {
-    font-size: 26px;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-.news-snippet {
-    font-size: 16px;
-    color: #ccc;
-    margin-bottom: 10px;
-    line-height: 1.5;
-}
-
-.news-date {
-    font-size: 13px;
-    color: #999;
-}
-
-@media (min-width: 900px) {
-    .news-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
+    .detail-content {
+        font-size: 16px;
     }
 }
 
