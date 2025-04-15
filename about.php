@@ -6,13 +6,13 @@ if (!$pembuat) {
     die("Error mengambil data PEMBUAT: " . $koneksi->error);
 }
 
+$pembuat = $pembuat->fetch_assoc(); 
+$pembuatPath = isset($pembuat['foto_pembuat']) && $pembuat['foto_pembuat'] ? "public/image/pembuat/" . $pembuat['foto_pembuat'] : 'public/assets/profile.png';
+
 $game = $koneksi->query("SELECT * FROM GAME");
 if (!$game) {
     die("Error mengambil data GAME: " . $koneksi->error);
 }
-
-$pembuat = $pembuat->fetch_assoc(); 
-$pembuatPath = isset($pembuat['foto_pembuat']) && $pembuat['foto_pembuat'] ? "public/image/pembuat/" . $pembuat['foto_pembuat'] : 'public/assets/profile.png';
 
 if ($game) {
     $game = $game->fetch_assoc();
@@ -92,6 +92,7 @@ $documentationPath = isset($game['video_thriller']) && $game['video_documentatio
     </div>
 </div>
 
+<?php include 'component/bubble.php'; ?>
 <?php include 'component/footer.php'; ?>
 </body>
 </html>

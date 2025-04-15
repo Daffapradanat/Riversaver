@@ -15,18 +15,6 @@ main {
     min-height: calc(100vh - 140px);
 }
 
-.dashboard-content {
-    position: relative;
-    text-align: center;
-    width: 100vw;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
 .merchandise-container {
     width: 90%;
     max-width: 1200px;
@@ -35,13 +23,14 @@ main {
 }
 
 .merchandise-container h2 {
-    margin: 20px;
+    margin-top: 15%;
     text-align: center;
     font-size: 60px;
     color: white;
 }
 
 .merchandise-grid {
+    margin: 5%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;

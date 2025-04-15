@@ -33,6 +33,10 @@ $pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
                         <th>Pendidikan</th>
                         <th>Foto</th>
                         <th>Detail</th>
+                        <th>Kode Negara</th>
+                        <th>No. Telepon</th>
+                        <th>Email</th>
+                        <th>Sosmed</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -50,6 +54,10 @@ $pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
                             <?php endif; ?>
                         </td>
                         <td><?= substr(htmlspecialchars($row['detail_pembuat']), 0, 100) ?>...</td>
+                        <td><?= htmlspecialchars($row['kode_negara']) ?></td>
+                        <td><?= htmlspecialchars($row['no_telp']) ?></td>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
+                        <td><?= htmlspecialchars($row['sosmed']) ?></td>
                         <td>
                             <a href="edit/edit_pembuat.php?id=<?= $row['id_pembuat'] ?>" class="btn btn-warning btn-sm">Edit</a>
                             <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" onclick="setDeleteUrl(<?= $row['id_pembuat'] ?>)">Hapus</a>

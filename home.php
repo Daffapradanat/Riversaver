@@ -7,6 +7,13 @@ if (!$gameQuery) {
 }
 $game = $gameQuery->fetch_assoc();
 
+$pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
+if (!$pembuat) {
+    die("Error mengambil data PEMBUAT: " . $koneksi->error);
+}
+
+$pembuat = $pembuat->fetch_assoc(); 
+
 $galeri = $koneksi->query("SELECT * FROM GALERI");
 if (!$galeri) {
     die("Error mengambil data GALERI: " . $koneksi->error);
@@ -15,6 +22,11 @@ if (!$galeri) {
 $komentar = $koneksi->query("SELECT * FROM KOMENTAR ORDER BY id_komentar DESC");
 if (!$komentar) {
     die("Error mengambil data KOMENTAR: " . $koneksi->error);
+}
+
+$komentar_data = [];
+while ($row = $komentar->fetch_assoc()) {
+    $komentar_data[] = $row;
 }
 
 $logo = !empty($game['logo']) 
@@ -96,19 +108,19 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
     </div>
 </div>
 
-<div id="galleryModal" class="modal">
-    <div class="modal-store">
-        <span class="close-store" onclick="closeGallery()">&times;</span>
+<div id="galleryModal" class="gallery-modal">
+    <div class="gallery-modal-store">
+        <span class="gallery-close-store" onclick="closeGallery()">&times;</span>
         
-        <img id="modalImage" class="modal-img" src="" alt="">
-        <div class="text">
+        <img id="modalImage" class="gallery-modal-img" src="" alt="">
+        <div class="gallery-text">
             <h3 id="modalTitle"></h3>
             <p id="modalDesc"></p>
         </div>
     </div>
 </div>
 
-<div class="moving-text-container">
+<div class="moving-text-container" id="komentar">
     <div class="moving-text">
         <span>Welcome to Riversaver! Enjoy the game and have fun!</span>
         <span>Welcome to Riversaver! Enjoy the game and have fun!</span>
@@ -120,45 +132,43 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
     <div class="komentar-layout">
         <div class="komentar-form">
             <h3>Share Your Feedback</h3>
-            <form action="backoffice/controller/komentarController.php" method="POST">
+            <form action="backoffice/controller/komentarController.php#komentar" method="POST">
                 <input type="text" name="nama_tamu" placeholder="Your Name" required>
                 <textarea name="komentar" placeholder="Your Feedback" required></textarea>
                 <button type="submit" name="tambah">Submit</button>
             </form>
         </div>
-
-        <div class="komentar-container">
-            <div class="swiper komentar-slider">
-                <div class="swiper-wrapper">
+            <div class="komentar-container">
                 <?php
-                    $counter = 0;
-                    while ($row = $komentar->fetch_assoc()) {
-                        if ($counter >= 3) break;
-                        echo "<div class='swiper-slide'>";
-                        echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>";
-                        echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
-                        echo "</div>";
-                        $counter++;
-                    }
-                    ?>
+                $counter = 0;
+                foreach ($komentar_data as $row) {
+                    if ($counter >= 3) break;
+                    echo "<div class='komentar-card'>";
+                    echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>";
+                    echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
+                    echo "</div>";
+                    $counter++;
+                }
+                ?>
+                <div class="komentar-button-wrapper">
+                    <button class="see-more-btn" onclick="openKomentarModal()">See All Comments</button>
                 </div>
             </div>
-            <button class="see-more-btn" onclick="openKomentarModal()">See All Comments</button>
         </div>
     </div>
 </div>
 
-<div id="komentarModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
+<div id="komentarModal" class="komentar-modal">
+    <div class="komentar-modal-content">
+        <div class="komentar-modal-header">
             <h2>All Comments</h2>
-            <span class="close" onclick="closeKomentarModal()">&times;</span>
+            <span class="komentar-modal-close" onclick="closeKomentarModal()">&times;</span>
         </div>
         
-        <div class="modal-search">
+        <div class="komentar-modal-search">
             <div>
                 <label for="searchKomentar">Search:</label>
-                <input type="text" id="searchKomentar" class="search-box" placeholder="Search comments...">
+                <input type="text" id="searchKomentar" class="komentar-search-box" placeholder="Search comments...">
             </div>
             <div>
                 <label for="limitKomentar">Show:</label>
@@ -173,9 +183,8 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
         
         <div id="komentarContainer">
             <?php
-            $komentar->data_seek(0);
-            while ($row = $komentar->fetch_assoc()) {
-                echo "<div class='komentar-card'>";
+            foreach ($komentar_data as $row) {
+                echo "<div class='komentar-card-modal'>";
                 echo "<strong>" . htmlspecialchars($row['nama_tamu']) . "</strong>";
                 echo "<p>" . htmlspecialchars($row['komentar']) . "</p>";
                 echo "</div>";
@@ -186,6 +195,7 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
     </div>
 </div>
 
+<?php include 'component/bubble.php'; ?>
 <?php include 'component/footer.php'; ?>
 
 <script src="public/assets/datatable/datatables.min.js"></script>
@@ -226,29 +236,7 @@ function safeDate($date, $format = 'd M Y', $fallback = 'Unknown release date') 
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper('.komentar-slider', {
-        loop: true,
-        autoplay: { 
-            delay: 5000,
-            disableOnInteraction: false
-        },
-        slidesPerView: 1,
-        effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
-        speed: 800,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-        }
-    });
-
-    let allComments = document.querySelectorAll(".komentar-card");
+    let allComments = document.querySelectorAll(".komentar-card-modal");
     let searchBox = document.getElementById("searchKomentar");
     let limitSelect = document.getElementById("limitKomentar");
     let paginationContainer = document.getElementById("pagination");
@@ -258,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderComments() {
         let searchTerm = searchBox.value.toLowerCase();
-        
+
         let filteredComments = Array.from(allComments).filter(card =>
             card.innerText.toLowerCase().includes(searchTerm)
         );
@@ -268,14 +256,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let end = start + itemsPerPage;
 
         allComments.forEach(card => (card.style.display = "none"));
-        
+
         filteredComments.slice(start, end).forEach(card => {
             card.style.display = "block";
             card.style.animation = "fadeIn 0.5s ease-in-out";
         });
 
         renderPagination(totalPages);
-        
+
         const noResultsMsg = document.getElementById("noResultsMsg");
         if (filteredComments.length === 0) {
             if (!noResultsMsg) {
@@ -294,9 +282,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderPagination(totalPages) {
         paginationContainer.innerHTML = "";
-        
+
         if (totalPages <= 1) return;
-        
+
         if (currentPage > 1) {
             let prevBtn = document.createElement("span");
             prevBtn.classList.add("page-item");
@@ -321,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderComments();
             });
             paginationContainer.appendChild(firstPage);
-            
+
             if (startPage > 2) {
                 let ellipsis = document.createElement("span");
                 ellipsis.textContent = "...";
@@ -349,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ellipsis.style.margin = "0 5px";
                 paginationContainer.appendChild(ellipsis);
             }
-            
+
             let lastPage = document.createElement("span");
             lastPage.classList.add("page-item");
             lastPage.innerText = totalPages;
@@ -394,6 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function openKomentarModal() {
     const modal = document.getElementById("komentarModal");
+    modal.style.display = "block";
     modal.classList.add("show");
     document.body.style.overflow = "hidden";
 }
@@ -407,7 +396,6 @@ function closeKomentarModal() {
         document.body.style.overflow = "auto";
     }, 300);
 }
-
 </script>
 </body>
 </html>

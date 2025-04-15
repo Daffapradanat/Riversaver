@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="public/assets/css/home.css">
+<link rel="stylesheet" href="public/assets/css/component.css">
 <footer class="footer">
         <div class="footer-content">
             <div class="logo-game">
@@ -7,9 +7,9 @@
             <div class="footer-left">
                 <h3>Contact Person</h3>
                 <ul class="contact-info">
-                    <ul class="fas fa-envelope">email@example.com</ul>
-                    <ul class="fab fa-instagram">@riversaver</ul>
-                    <ul class="fas fa-phone">+62 812-3456-7890</ul>
+                    <ul class="fas fa-envelope"><?= htmlspecialchars($pembuat['email'] ?? 'email@example.com') ?></ul>
+                    <ul class="fab fa-instagram"><?= htmlspecialchars($pembuat['sosmed'] ?? '@example') ?></ul>
+                    <ul class="fas fa-phone"><?= htmlspecialchars($pembuat['kode_negara'] ?? '+1') ?> <?= htmlspecialchars($pembuat['no_telp'] ?? '8123456789') ?></ul>
                 </ul>
             </div>
             <div class="footer-right">

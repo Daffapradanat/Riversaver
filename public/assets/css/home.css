@@ -407,6 +407,7 @@ main {
     }
 }
 
+/* ===== Komentar ===== */
 .komentar-section {
     display: flex;
     flex-direction: column;
@@ -439,11 +440,8 @@ main {
 
 .komentar-layout {
     display: flex;
-    justify-content: space-between;
     align-items: stretch;
-    gap: 30px;
     position: relative;
-    z-index: 1;
 }
 
 .komentar-form {
@@ -534,72 +532,39 @@ main {
     left: 100%;
 }
 
-/* Comments display styling */
 .komentar-container {
-    width: 50%;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 12px;
 }
 
-.komentar-slider {
-    height: 350px;
-    border-radius: 15px;
-    overflow: visible;
+.komentar-card {
+    background: #161616 !important;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.swiper-slide {
-    background: rgba(18, 18, 18, 0.9);
-    padding: 25px;
-    border-radius: 15px;
-    border: none;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin: 20px;
-}
-
-.swiper-slide:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.swiper-slide::before {
-    content: '"';
-    font-size: 5rem;
-    font-family: Georgia, serif;
-    color: rgba(0, 75, 155, 0.1);
-    position: absolute;
-    top: -20px;
-    left: 10px;
-    line-height: 1;
-}
-
-.swiper-slide strong {
-    font-size: 18px;
-    margin-bottom: 12px;
-    color: #004b9b;
-    display: flex;
-    align-items: center;
-}
-
-.swiper-slide strong::before {
-    content: '';
-    display: inline-block;
-    width: 5px;
-    height: 20px;
-    background: #58a1ea;
-    margin-right: 10px;
-    border-radius: 3px;
-}
-
-.swiper-slide p {
+.komentar-card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #58a1ea !important;
     font-size: 16px;
-    color: white;
-    line-height: 1.6;
-    flex-grow: 1;
+}
+
+.komentar-card p {
+    color: #ffffff !important;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.komentar-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .see-more-btn {
@@ -624,11 +589,8 @@ main {
     box-shadow: 0 5px 15px rgba(0, 75, 155, 0.3);
 }
 
-.modal {
-    backdrop-filter: blur(8px);
-}
-
-.modal {
+/* ===== Komentar Modal Styles ===== */
+.komentar-modal {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -639,17 +601,18 @@ main {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
 }
 
-.modal.show {
+.komentar-modal.show {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-content {
+.komentar-modal-content {
     background: #fff;
     border-radius: 15px;
     width: 90%;
@@ -661,9 +624,11 @@ main {
     flex-direction: column;
     gap: 20px;
     overflow: auto;
+    margin: 10% auto;
 }
 
-.modal-header {
+/* ===== Komentar Modal Header ===== */
+.komentar-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -671,81 +636,35 @@ main {
     padding-bottom: 10px;
 }
 
-.modal-header h2 {
+.komentar-modal-header h2 {
     font-size: 2rem;
     color: #004b9b;
     margin: 0;
 }
 
-.close {
-    color: #004b9b;
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #444;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
+.komentar-modal-close {
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 50%;
+    background: #f5f7fa;
+    color: #004b9b;
+    cursor: pointer;
+    transition: all 0.3s ease;
     border: none;
 }
 
-.close:hover {
-    background-color: red;
-    transform: scale(1.1);
+.komentar-modal-close:hover {
+    background: #58a1ea;
+    color: white;
+    transform: rotate(90deg);
 }
 
-.modal-search {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.search-box {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#komentarContainer {
-    max-height: 400px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-
-.komentar-card {
-    background: #f4f4f4;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.komentar-card strong {
-    color: #004b9b;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-search {
+/* ===== Komentar Modal Search ===== */
+.komentar-modal-search {
     display: flex;
     justify-content: space-between;
     gap: 15px;
@@ -753,15 +672,16 @@ main {
     padding: 10px;
     background: #f5f7fa;
     border-radius: 10px;
+    flex-wrap: wrap;
 }
 
-.modal-search div {
+.komentar-modal-search div {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.search-box {
+.komentar-search-box {
     padding: 8px 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -775,25 +695,7 @@ main {
     border-radius: 5px;
 }
 
-.close {
-    font-size: 30px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #f5f7fa;
-    transition: all 0.3s ease;
-}
-
-.close:hover {
-    background: #58a1ea;
-    color: white;
-    transform: rotate(90deg);
-}
-
-/* Card Layout in modal */
+/* ===== Komentar Modal Container ===== */
 #komentarContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -818,6 +720,36 @@ main {
     border-radius: 10px;
 }
 
+/* ===== Komentar Modal Card ===== */
+.komentar-card-modal {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.komentar-card-modal strong {
+    display: block;
+    color: #004b9b;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.komentar-card-modal p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* ===== Komentar Section (Preview di Luar Modal) ===== */
+.komentar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
 .komentar-card {
     background: white;
     border-radius: 10px;
@@ -827,25 +759,59 @@ main {
     border-left: 4px solid #58a1ea;
 }
 
+.komentar-card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #004b9b;
+    font-size: 16px;
+}
+
+.komentar-card p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
 .komentar-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.komentar-card strong {
-    display: block;
-    color: #004b9b;
+/* ===== Tombol Lihat Semua Komentar ===== */
+.see-more-btn {
+    align-self: flex-end;
+    background-color: transparent;
+    color: #58a1ea;
+    font-weight: bold;
     font-size: 16px;
-    margin-bottom: 8px;
+    border: 2px solid #58a1ea;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 50px 20px;
+    transition: all 0.3s ease;
 }
 
-.komentar-card p {
-    color: #555;
-    font-size: 15px;
-    line-height: 1.5;
+.see-more-btn:hover {
+    background-color: #58a1ea;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 75, 155, 0.3);
 }
 
-/* Pagination */
+/* ===== Animasi Fade ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ===== Pagination Komentar ===== */
 #pagination {
     display: flex;
     justify-content: center;
@@ -876,4 +842,3 @@ main {
     background: #004b9b;
     color: white;
 }
-

@@ -29,7 +29,7 @@ if (isset($_POST['update'])) {
     $sql = "UPDATE KOMENTAR SET nama_tamu='$nama_tamu', komentar='$komentar' WHERE id_komentar='$id_komentar'";
     $koneksi->query($sql);
 
-    header("Location: ../../home.php");
+    header("Location: ../../home.php#komentar");
     exit();
 }
 ?>

@@ -6,6 +6,13 @@ if (!$berita) {
     die("Error mengambil data BERITA: " . $koneksi->error);
 }
 
+$pembuat = $koneksi->query("SELECT * FROM PEMBUAT");
+if (!$pembuat) {
+    die("Error mengambil data PEMBUAT: " . $koneksi->error);
+}
+
+$pembuat = $pembuat->fetch_assoc(); 
+
 $game = $koneksi->query("SELECT * FROM GAME");
 if (!$game) {
     die("Error mengambil data GAME: " . $koneksi->error);
@@ -29,26 +36,27 @@ $logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['lo
 <body>
 <?php include 'component/header.php'; ?>
 
-    <div class="news-container">
-        <h2 class="news-title">News</h2>
-        <div class="news-grid">
-            <?php if ($berita->num_rows > 0) { ?>
-                <?php while ($row = $berita->fetch_assoc()) { ?>
-                    <a href="news-detail.php?id=<?php echo $row['id_berita']; ?>" class="news-card-vertical">
-                        <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>" class="news-image-banner">
-                        <div class="news-body">
-                            <h3 class="news-heading"><?php echo $row['judul_berita']; ?></h3>
-                            <p class="news-snippet"><?php echo substr($row['detail_berita'], 0, 120); ?>...</p>
-                            <span class="news-date"><?php echo date('d M Y', strtotime($row['tgl_berita'])); ?></span>
-                        </div>
-                    </a>
-                <?php } ?>
-            <?php } else { ?>
-                <p class="no-news">No news available.</p>
+<div class="news-container">
+    <h2 class="news-title">News</h2>
+    <div class="news-grid">
+        <?php if ($berita->num_rows > 0) { ?>
+            <?php while ($row = $berita->fetch_assoc()) { ?>
+                <a href="news-detail.php?id=<?php echo $row['id_berita']; ?>" class="news-card-vertical">
+                    <img src="public/image/berita/<?php echo $row['foto_berita']; ?>" alt="<?php echo $row['judul_berita']; ?>" class="news-image-banner">
+                    <div class="news-body">
+                        <h3 class="news-heading"><?php echo $row['judul_berita']; ?></h3>
+                        <p class="news-snippet"><?php echo substr($row['detail_berita'], 0, 120); ?>...</p>
+                        <span class="news-date"><?php echo date('d M Y', strtotime($row['tgl_berita'])); ?></span>
+                    </div>
+                </a>
             <?php } ?>
-        </div>
+        <?php } else { ?>
+            <p class="no-news">No news available.</p>
+        <?php } ?>
     </div>
+</div>
 
+<?php include 'component/bubble.php'; ?>
 <?php include 'component/footer.php'; ?>
 
 <script>
