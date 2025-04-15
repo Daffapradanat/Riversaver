@@ -41,7 +41,7 @@ include '../../../config/koneksi.php';
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Foto Game</label>
+                    <label for="image" class="form-label">Logo Transparant</label>
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
 

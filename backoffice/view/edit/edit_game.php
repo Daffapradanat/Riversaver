@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="image" class="form-label">Foto Game</label>
+                    <label for="image" class="form-label">Foto Transparant</label>
                     <?php if ($data['image']): ?>
                         <div class="mb-2">
                             <img src="../../../public/image/game/<?= htmlspecialchars($data['image']) ?>" width="150" class="img-thumbnail">
