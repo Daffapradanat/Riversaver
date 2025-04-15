@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Admin - Riversaver</title>
-    <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
-    <link rel="stylesheet" href="/Riversaver_Native/public/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="icon" href="public/assets/logo.png" type="image/png">
+    <link rel="stylesheet" href="public/assets/bootstrap/css/bootstrap.min.css">
 </head>
 <body class="bg-light d-flex align-items-center" style="height: 100vh;">
 
@@ -53,6 +53,6 @@
     </div>
 </div>
 
-<script src="/Riversaver_Native/public/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="public/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

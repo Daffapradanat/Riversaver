@@ -12,7 +12,7 @@ if (isset($_POST['register'])) {
 
     if (mysqli_num_rows($checkResult) > 0) {
         $_SESSION['error'] = 'Username sudah digunakan!';
-        header('Location: /Riversaver_Native/register.php');
+        header('Location: ../../register.php');
         exit();
     } else {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -21,11 +21,11 @@ if (isset($_POST['register'])) {
         
         if (mysqli_query($koneksi, $insertQuery)) {
             $_SESSION['success'] = 'Registrasi berhasil! Silakan login.';
-            header('Location: /Riversaver_Native/login.php');
+            header('Location: ../../login.php');
             exit();
         } else {
             $_SESSION['error'] = 'Terjadi kesalahan saat registrasi!';
-            header('Location: /Riversaver_Native/register.php');
+            header('Location: ../../register.php');
             exit();
         }
     }
@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $user['username'];
             $_SESSION['nama_admin'] = $user['nama_admin'];
 
-            header('Location: /Riversaver_Native/backoffice/index.php');
+            header('Location: ../../backoffice/index.php');
             exit();
         } else {
             $_SESSION['error'] = 'Password salah!';
@@ -55,19 +55,19 @@ if (isset($_POST['login'])) {
         $_SESSION['error'] = 'Username tidak ditemukan!';
     }
 
-    header('Location: /Riversaver_Native/login.php');
+    header('Location: ../../login.php');
     exit();
 }
 
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: /Riversaver_Native/login.php');
+    header('Location: ../../login.php');
     exit();
 }
 
 function checkAuth() {
     if (!isset($_SESSION['admin_id'])) {
-        header('Location: /Riversaver_Native/login.php');
+        header('Location: ../../login.php');
         exit();
     }
 }

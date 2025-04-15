@@ -112,7 +112,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Game</button>
-                <a href="/Riversaver_Native/backoffice/view/game.php" class="btn btn-secondary">Batal</a>
+                <a href="../game.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

@@ -10,7 +10,7 @@ $game = $koneksi->query("SELECT * FROM GAME");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Game</title>
-    <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
+    <link rel="icon" href="../../public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../../public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/assets/datatable/datatables.min.css">
     <link rel="stylesheet" href="../../public/assets/css/index.css">

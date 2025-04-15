@@ -22,7 +22,7 @@ $logo = isset($game['logo']) && $game['logo'] ? "public/image/game/" . $game['lo
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($game['judul_game'] ?? 'Unknown game') ?></title>
     <link rel="stylesheet" href="public/assets/css/news-details.css">
-    <link rel="icon" href="/Riversaver_Native/public/assets/logo.png" type="image/png">
+    <link rel="icon" href="public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="public/assets/datatable/datatables.min.css">
     <link rel="stylesheet" href="public/assets/swiper/package/swiper-bundle.min.css">
     <link rel="stylesheet" href="public/assets/AOS/dist/aos.css">

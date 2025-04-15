@@ -6,13 +6,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/Riversaver_Native/backoffice/index.php">Dashboard</a>
+                    <a class="nav-link active" aria-current="page" href="backoffice/index.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Riversaver_Native/backoffice/view/profile.php">Profile</a>
+                    <a class="nav-link" href="backoffice/view/profile.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a href="/Riversaver_Native/backoffice/controller/authController.php?logout=true" class="nav-link" href="#">Logout</a>
+                    <a href="backoffice/controller/authController.php?logout=true" class="nav-link" href="#">Logout</a>
                 </li>
             </ul>
         </div>

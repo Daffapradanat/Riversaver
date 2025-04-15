@@ -53,7 +53,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Galeri</button>
-                <a href="/Riversaver_Native/backoffice/view/galeri.php" class="btn btn-secondary">Batal</a>
+                <a href="../galeri.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

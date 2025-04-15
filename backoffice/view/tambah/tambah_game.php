@@ -74,7 +74,7 @@ include '../../../config/koneksi.php';
 
                 <input type="hidden" name="id_admin" value="1">
                 <button type="submit" name="tambah" class="btn btn-primary">Tambah Game</button>
-                <a href="/Riversaver_Native/backoffice/view/game.php" class="btn btn-secondary">Batal</a>
+                <a href="../game.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

@@ -47,7 +47,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Berita</button>
-                <a href="/Riversaver_Native/backoffice/view/komentar.php" class="btn btn-secondary">Batal</a>
+                <a href="../komentar.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

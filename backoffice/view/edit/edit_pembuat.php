@@ -85,7 +85,7 @@
                 </div>
 
                 <button type="submit" name="update" class="btn btn-success">Update Pembuat</button>
-                <a href="/Riversaver_Native/backoffice/view/pembuat.php" class="btn btn-secondary">Batal</a>
+                <a href="../pembuat.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>

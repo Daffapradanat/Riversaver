@@ -3,7 +3,7 @@ session_start();
 include '../../config/koneksi.php';
 
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: /Riversaver_Native/login.php');
+    header('Location: ../../login.php');
     exit();
 }
 
@@ -12,7 +12,7 @@ $query = "SELECT username, nama_admin, alamat_admin, no_telp_admin, image FROM A
 $result = mysqli_query($koneksi, $query);
 $admin = mysqli_fetch_assoc($result);
 
-$image = $admin['image'] ? "/Riversaver_Native/public/image/admin/{$admin['image']}" : "/Riversaver_Native/public/assets/profile.png";
+$image = $admin['image'] ? "../../public/image/admin/{$admin['image']}" : "../../public/assets/profile.png";
 $alamat = $admin['alamat_admin'] ? htmlspecialchars($admin['alamat_admin']) : '-';
 $no_telp = $admin['no_telp_admin'] ? htmlspecialchars($admin['no_telp_admin']) : '-';
 
