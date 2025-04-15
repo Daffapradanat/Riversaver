@@ -35,11 +35,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="tgl_galeri" class="form-label">Tanggal Galeri</label>
-                    <input type="date" class="form-control" id="tgl_galeri" name="tgl_galeri" value="<?= $data['tgl_galeri'] ?>" required>
-                </div>
-
-                <div class="mb-3">
                     <label for="detail_galeri" class="form-label">Detail Galeri</label>
                     <textarea class="form-control" id="detail_galeri" name="detail_galeri" rows="5" required><?= htmlspecialchars($data['detail_galeri']) ?></textarea>
                 </div>

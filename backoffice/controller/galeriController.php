@@ -11,7 +11,7 @@ $id_admin = $_SESSION['admin_id'];
 
 if (isset($_POST['tambah'])) {
     $judul = $_POST['judul_galeri'];
-    $tgl = $_POST['tgl_galeri'];
+    $tgl = date('Y-m-d');
     $detail = $_POST['deskripsi_galeri'];
     
     $image = $_FILES['foto_galeri']['name'];
@@ -37,7 +37,7 @@ if (isset($_GET['hapus'])) {
 if (isset($_POST['update'])) {
     $id_galeri = $_POST['id_galeri'];
     $judul = $_POST['judul_galeri'];
-    $tgl = $_POST['tgl_galeri'];
+    $tgl = date('Y-m-d');
     $detail = $_POST['detail_galeri'];
 
     if (!empty($_FILES['foto_galeri']['name'])) {
