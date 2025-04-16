@@ -1,6 +1,6 @@
 <div class="sidebar">
     <div class="logo-container text-center text-white d-flex align-items-center justify-content-center">
-        <img src="/Riversaver/public/assets/logo.png" alt="Logo" class="logo-img">
+        <img src="../../public/assets/logo.png" alt="Logo" class="logo-img">
         <h4 class="ms-2">Admin Panel</h4>
     </div>
     <div class="list-group mt-4">

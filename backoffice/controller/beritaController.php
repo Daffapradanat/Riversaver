@@ -16,7 +16,7 @@ if (isset($_POST['tambah'])) {
 
     $foto = $_FILES['foto_berita']['name'];
     $tmp = $_FILES['foto_berita']['tmp_name'];
-    $folder = "../../public/image/berita/";
+    $folder = "../../../public/image/berita/";
     move_uploaded_file($tmp, $folder . $foto);
 
     $stmt = $koneksi->prepare("INSERT INTO BERITA (id_admin, judul_berita, tgl_berita, foto_berita, detail_berita) VALUES (?, ?, ?, ?, ?)");
@@ -48,7 +48,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['foto_berita']['name'])) {
         $foto = $_FILES['foto_berita']['name'];
         $tmp = $_FILES['foto_berita']['tmp_name'];
-        $folder = "../../public/image/berita/";
+        $folder = "../../../public/image/berita/";
         move_uploaded_file($tmp, $folder . $foto);
 
         $stmt = $koneksi->prepare("UPDATE BERITA SET id_admin = ?, judul_berita = ?, tgl_berita = ?, foto_berita = ?, detail_berita = ? WHERE id_berita = ?");

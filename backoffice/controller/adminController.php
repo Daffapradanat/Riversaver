@@ -10,7 +10,7 @@ if (isset($_POST['tambah'])) {
     
     $image = $_FILES['image']['name'];
     $tmp = $_FILES['image']['tmp_name'];
-    $folder = "../../public/image/admin/";
+    $folder = "../../../public/image/admin/";
     move_uploaded_file($tmp, $folder . $image);
     
     $sql = "INSERT INTO ADMIN (username, password, nama_admin, alamat_admin, no_telp_admin, image)
@@ -45,7 +45,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         $tmp = $_FILES['image']['tmp_name'];
-        $folder = "../../public/image/admin/";
+        $folder = "../../../public/image/admin/";
         move_uploaded_file($tmp, $folder . $image);
         
         $sql = "UPDATE ADMIN SET username='$username', nama_admin='$nama_admin', alamat_admin='$alamat_admin', no_telp_admin='$no_telp_admin', image='$image' $password_sql WHERE id_admin='$id_admin'";

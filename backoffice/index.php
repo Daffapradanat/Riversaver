@@ -9,7 +9,7 @@ include 'controller/dashboardController.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Riversaver</title>
-    <link rel="icon" href="../../public/assets/logo.png" type="image/png">
+    <link rel="icon" href="../public/assets/logo.png" type="image/png">
     <link rel="stylesheet" href="../public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/assets/css/index.css">
 </head>

@@ -16,7 +16,7 @@ if (isset($_POST['tambah'])) {
     
     $image = $_FILES['foto_galeri']['name'];
     $tmp = $_FILES['foto_galeri']['tmp_name'];
-    $folder = "../../public/image/galeri/";
+    $folder = "../../../public/image/galeri/";
     move_uploaded_file($tmp, $folder . $image);
     
     $sql = "INSERT INTO GALERI (id_admin, judul_galeri, tgl_galeri, foto_galeri, detail_galeri)
@@ -43,7 +43,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['foto_galeri']['name'])) {
         $image = $_FILES['foto_galeri']['name'];
         $tmp = $_FILES['foto_galeri']['tmp_name'];
-        $folder = "../../public/image/galeri/";
+        $folder = "../../../public/image/galeri/";
         move_uploaded_file($tmp, $folder . $image);
 
         $sql = "UPDATE GALERI SET judul_galeri='$judul', tgl_galeri='$tgl', foto_galeri='$image', detail_galeri='$detail' WHERE id_galeri='$id_galeri'";

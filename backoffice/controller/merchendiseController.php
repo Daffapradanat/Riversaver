@@ -18,7 +18,7 @@ if (isset($_POST['tambah'])) {
     if (!empty($_FILES['foto_merchan']['name'])) {
         $foto_merchan = str_replace(' ', '_', $_FILES['foto_merchan']['name']);
         $tmp = $_FILES['foto_merchan']['tmp_name'];
-        $folder = "../../public/image/merchandise/";
+        $folder = "../../../public/image/merchandise/";
 
         if (move_uploaded_file($tmp, $folder . $foto_merchan)) {
             $stmt = $koneksi->prepare("INSERT INTO MERCHANDISE (id_admin, nama_merchan, foto_merchan, harga_merchan, detail_merchan) VALUES (?, ?, ?, ?, ?)");
@@ -43,7 +43,7 @@ if (isset($_GET['hapus'])) {
     $stmt->close();
 
     if ($data && $data['foto_merchan']) {
-        $file_path = "../../public/image/merchandise/" . $data['foto_merchan'];
+        $file_path = "../../../public/image/merchandise/" . $data['foto_merchan'];
         if (file_exists($file_path)) {
             unlink($file_path);
         }
@@ -67,7 +67,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['foto_merchan']['name'])) {
         $foto_merchan = str_replace(' ', '_', $_FILES['foto_merchan']['name']);
         $tmp = $_FILES['foto_merchan']['tmp_name'];
-        $folder = "../../public/image/merchandise/";
+        $folder = "../../../public/image/merchandise/";
 
         $stmt = $koneksi->prepare("SELECT foto_merchan FROM MERCHANDISE WHERE id_merchan = ?");
         $stmt->bind_param("i", $id_merchan);
@@ -77,7 +77,7 @@ if (isset($_POST['update'])) {
         $stmt->close();
 
         if ($data && $data['foto_merchan']) {
-            $file_path = "../../public/image/merchandise/" . $data['foto_merchan'];
+            $file_path = "../../../public/image/merchandise/" . $data['foto_merchan'];
             if (file_exists($file_path)) {
                 unlink($file_path);
             }

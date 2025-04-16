@@ -12,7 +12,7 @@ $query = "SELECT username, nama_admin, alamat_admin, no_telp_admin, image FROM A
 $result = mysqli_query($koneksi, $query);
 $admin = mysqli_fetch_assoc($result);
 
-$image = $admin['image'] ? "../../public/image/admin/{$admin['image']}" : "../../public/assets/profile.png";
+$image = $admin['image'] ? "../../../public/image/admin/{$admin['image']}" : "../../public/assets/profile.png";
 $alamat = $admin['alamat_admin'] ? htmlspecialchars($admin['alamat_admin']) : '-';
 $no_telp = $admin['no_telp_admin'] ? htmlspecialchars($admin['no_telp_admin']) : '-';
 
@@ -24,7 +24,7 @@ if (isset($_POST['update_profile'])) {
 
     if ($_FILES['image']['name']) {
         $image_name = basename($_FILES['image']['name']);
-        $target_dir = '../../public/image/admin/' . $image_name;
+        $target_dir = '../../../public/image/admin/' . $image_name;
         move_uploaded_file($_FILES['image']['tmp_name'], $target_dir);
     } else {
         $image_name = $admin['image'];

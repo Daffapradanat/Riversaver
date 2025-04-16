@@ -6,11 +6,11 @@
     <title>Edit Berita</title>
     <link rel="stylesheet" href="../../../public/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../public/assets/css/index.css">
-    <link rel="icon" href="public/assets/logo.png" type="image/png">
+    <link rel="icon" href="../../../public/assets/logo.png" type="image/png">
 
 </head>
 <body>
-    <?php include '../../component/sidebar.php'; ?>
+    <?php include '../../component/sidebar2.php'; ?>
 
     <div class="content">
         <?php include '../../component/header.php'; ?>

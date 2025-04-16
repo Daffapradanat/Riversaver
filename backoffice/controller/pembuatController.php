@@ -20,7 +20,7 @@ if (isset($_POST['tambah'])) {
     
     $foto = $_FILES['foto_pembuat']['name'];
     $tmp = $_FILES['foto_pembuat']['tmp_name'];
-    $folder = "../../public/image/pembuat/";
+    $folder = "../../../public/image/pembuat/";
     move_uploaded_file($tmp, $folder . $foto);
     
     $sql = "INSERT INTO PEMBUAT (id_admin, nama_pembuat, pendidikan_pembuat, detail_pembuat, foto_pembuat, kode_negara, no_telp, email, sosmed)
@@ -51,7 +51,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['foto_pembuat']['name'])) {
         $foto = $_FILES['foto_pembuat']['name'];
         $tmp = $_FILES['foto_pembuat']['tmp_name'];
-        $folder = "../../public/image/pembuat/";
+        $folder = "../../../public/image/pembuat/";
         move_uploaded_file($tmp, $folder . $foto);
         
         $sql = "UPDATE PEMBUAT SET 

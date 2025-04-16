@@ -19,7 +19,7 @@ if (isset($_POST['tambah'])) {
 
     $image = $_FILES['image']['name'];
     $tmp_image = $_FILES['image']['tmp_name'];
-    $folder_image = "../../public/image/game/";
+    $folder_image = "../../../public/image/game/";
     move_uploaded_file($tmp_image, $folder_image . $image);
 
     $logo = $_FILES['logo']['name'];
@@ -28,12 +28,12 @@ if (isset($_POST['tambah'])) {
 
     $video = $_FILES['video_thriller']['name'];
     $tmp_video = $_FILES['video_thriller']['tmp_name'];
-    $folder_video = "../../public/assets/video/";
+    $folder_video = "../../../public/assets/video/";
     move_uploaded_file($tmp_video, $folder_video . $video);
 
     $videoDoc = $_FILES['video_documentation']['name'];
     $tmpVideoDoc = $_FILES['video_documentation']['tmp_name'];
-    $videoDocPath = "../../public/assets/video/";
+    $videoDocPath = "../../../public/assets/video/";
     move_uploaded_file($tmpVideoDoc, $videoDocPath . $videoDoc);
 
     $sql = "INSERT INTO GAME (id_admin, judul_game, image, detail_game, versi, spesifikasi, release_date, genre, video_thriller, logo, video_documentation)
@@ -70,7 +70,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         $tmp_image = $_FILES['image']['tmp_name'];
-        $folder_image = "../../public/image/game/";
+        $folder_image = "../../../public/image/game/";
         move_uploaded_file($tmp_image, $folder_image . $image);
         $sql .= ", image='$image'";
     }
@@ -85,7 +85,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['video_thriller']['name'])) {
         $video = $_FILES['video_thriller']['name'];
         $tmp_video = $_FILES['video_thriller']['tmp_name'];
-        $folder_video = "../../public/assets/video/";
+        $folder_video = "../../../public/assets/video/";
         move_uploaded_file($tmp_video, $folder_video . $video);
         $sql .= ", video_thriller='$video'";
     }
@@ -93,7 +93,7 @@ if (isset($_POST['update'])) {
     if (!empty($_FILES['video_documentation']['name'])) {
         $videoDoc = $_FILES['video_documentation']['name'];
         $tmpVideoDoc = $_FILES['video_documentation']['tmp_name'];
-        $videoDocPath = "../../public/assets/video/";
+        $videoDocPath = "../../../public/assets/video/";
         move_uploaded_file($tmpVideoDoc, $videoDocPath . $videoDoc);
         $sql .= ", video_documentation='$videoDoc'";
     }
